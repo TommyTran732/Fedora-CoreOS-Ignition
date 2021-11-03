@@ -1,0 +1,165 @@
+variant: fcos
+version: 1.4.0
+boot_device:
+passwd:
+  users:
+    - name: tomster
+      ssh_authorized_keys: 
+        - ssh-rsa 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 tomster@PRL-01
+      groups:
+        - wheel
+        - sudo
+systemd:
+  units:
+    - name: postinst.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Initial System Setup
+        # We run after `systemd-machine-id-commit.service` to ensure that
+        # `ConditionFirstBoot=true` services won't rerun on the next boot.
+        After=systemd-machine-id-commit.service
+        After=network-online.target
+        # We run before `zincati.service` to avoid conflicting rpm-ostree
+        # transactions.
+        Before=zincati.service
+        ConditionPathExists=!/var/lib/%N.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/rpm-ostree install fail2ban firewalld prelockd tuned qemu-guest-agent
+        ExecStart=/bin/touch /var/lib/%N.stamp
+        ExecStart=/usr/sbin/setsebool -P container_use_cephfs off
+        ExecStart=/usr/sbin/setsebool -P virt_use_nfs off
+        ExecStart=/usr/sbin/setsebool -P virt_use_samba off
+        ExecStart=/usr/bin/sed 's/nullok//g' /etc/pam.d/system-auth
+        ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Whonix/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
+        ExecStart=/bin/systemctl --no-block reboot
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: postinst2.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Initial System Setup Part 2
+        # We run this after the packages have been overlayed
+        After=network-online.target
+        ConditionPathExists=!/var/lib/%N.stamp
+        ConditionPathExists=/var/lib/postinst.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule "0 5 0 * * 1"
+        ExecStart=/bin/touch /var/lib/%N.stamp
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: docker.service
+      enabled: true
+    - name: fstrim.timer
+      enabled: true
+    - name: systemd-oomd.service
+      enabled: true
+    - name: rpm-ostree-countme.timer
+      enabled: false
+      mask: true
+storage:
+  files:
+    - path: /etc/zincati/config.d/51-rollout-wariness.toml
+      contents:
+        inline: |
+          [identity]
+          rollout_wariness = 1
+    - path: /etc/zincati/config.d/55-updates-strategy.toml
+      contents:
+        inline: |
+          [updates]
+          strategy = "periodic"
+          [updates.periodic]
+          time_zone = "localtime"
+          [[updates.periodic.window]]
+          days = [ "Sun" ]
+          start_time = "0:00"
+          length_minutes = 60
+    - path: /etc/fail2ban/jail.local
+      contents:
+        inline: |
+          [DEFAULT]
+          # Maximum 3 failures:
+          maxentry = 3
+          # Ban hosts for ten hour:
+          bantime = 3600
+          # Override /etc/fail2ban/jail.d/00-firewalld.conf:
+          banaction = iptables-multiport
+          [sshd]
+          enabled = true
+    - path: /etc/tuned/active_profile
+      overwrite: true
+      contents:
+        inline: |
+          virtual-guest
+    - path: /etc/tuned/profile_mode
+      overwrite: true
+      contents:
+        inline: |
+          manual
+    - path: /etc/systemd/zram-generator.conf
+      overwrite: true
+      contents:
+        inline: |
+          # This config file enables a /dev/zram0 device with the default settings
+          [zram0]
+          zram-fraction = 1
+          max-zram-size = 8192
+    - path: /etc/security/limits.d/30-disable-coredump.conf
+      overwrite: true
+      contents: 
+        inline: | 
+          * hard core 0
+    - path: /etc/ssh/ssh_config.d/60-disable-GSSAPI.conf
+      overwrite: true
+      contents: 
+        inline: | 
+          GSSAPIAuthentication no
+    - path: /etc/sysctl.d/20-silence-audit.conf
+      contents:
+        inline: |
+          # Raise console message logging level from DEBUG (7) to WARNING (4)
+          # so that audit messages don't get interspersed on the console that
+          # may frustrate a user trying to interactively log in.
+          kernel.printk=4
+  links:
+    - path: /etc/localtime
+      target: ../usr/share/zoneinfo/America/New_York
+    - path: /etc/systemd/system/multi-user.target.wants/tuned.service
+      target: /usr/lib/systemd/system/tuned.service
+    - path: /etc/systemd/system/multi-user.target.wants/prelockd.service
+      target: /usr/lib/systemd/system/prelockd.service
+    - path: /etc/systemd/system/multi-user.target.wants/fail2ban.service
+      target: /usr/lib/systemd/system/fail2ban.service
+    - path: /etc/systemd/system/kdump.service.target
+      target: /dev/null
+kernel_arguments:
+  should_exist:
+    - kvm.nx_huge_pages=force
+    - random.trust_cpu=off
+    - kernel.dmesg_restrict=1
+    - fs.protected_fifos=2
+    - fs.protected_regular=2
+    - fs.protected_symlinks=1
+    - fs.protected_hardlinks=1
+    - net.core.bpf_jit_harden=2
+    - kernel.kexec_load_disabled=1
+    - kernel.kptr_restrict=2
+    - vm.mmap_rnd_bits=32
+    - vm.mmap_rnd_compat_bits=16
+    - kernel.yama.ptrace_scope=2
+    - fs.suid_dumpable=0
+    - net.ipv4.tcp_rfc1337=1
+    - kernel.perf_event_paranoid=3
+    - kernel.randomize_va_space=2
+    - net.ipv4.icmp_ignore_bogus_error_responses=1
+    - net.ipv4.conf.all.log_martians=1

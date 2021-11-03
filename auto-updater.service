@@ -1,0 +1,15 @@
+[Unit]
+Description=Automatic Updater
+After=docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/path/to/docker-compose/directory
+ExecStart=/usr/bin/git pull
+ExecStart=/usr/bin/docker-compose up -d
+
+[Install]
+WantedBy=multi-user.target

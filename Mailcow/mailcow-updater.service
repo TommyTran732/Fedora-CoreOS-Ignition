@@ -1,0 +1,14 @@
+[Unit]
+Description=Mailcow Automatic Updater
+After=docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/opt/mailcow-dockerized/
+ExecStart=/opt/mailcow-dockerized/update.sh --force
+
+[Install]
+WantedBy=multi-user.target

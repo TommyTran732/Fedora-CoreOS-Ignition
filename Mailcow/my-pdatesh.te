@@ -1,0 +1,7 @@
+module my-pdatesh 1.0;
+
+require {
+	type init_t;
+	type var_t;
+	class file { execute execute_no_trans open read };
+}
