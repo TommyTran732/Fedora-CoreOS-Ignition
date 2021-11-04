@@ -1,6 +1,5 @@
 variant: fcos
 version: 1.4.0
-boot_device:
 passwd:
   users:
     - name: tomster
