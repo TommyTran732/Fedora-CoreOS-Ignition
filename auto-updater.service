@@ -10,6 +10,7 @@ Group=root
 WorkingDirectory=/path/to/docker-compose/directory
 ExecStart=/usr/bin/git pull
 ExecStart=/usr/bin/docker-compose up -d
+Type=oneshot
 
 [Install]
 WantedBy=multi-user.target
