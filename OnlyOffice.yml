@@ -52,7 +52,7 @@ systemd:
         Type=oneshot
         RemainAfterExit=yes
         ExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule "0 5 0 * * 1"
-        ExecStart=/usr/bin/docker run --name onlyoffice --restart unless-stopped -i -t -d -p 80:80 -p 443:443 -e LETS_ENCRYPT_DOMAIN=your_domain -e LETS_ENCRYPT_MAIL=your_mail -e JWT_ENABLED=true -e JWT_SECRET=your_secret_here -v /srv/onlyoffice/DocumentServer/logs:/var/log/onlyoffice:Z -v /srv/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data:Z -v /srv/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice:Z -v /srv/onlyoffice/DocumentServer/rabbitmq:/var/lib/rabbitmq:Z -v /srv/onlyoffice/DocumentServer/redis:/var/lib/redis:Z -v /srv/onlyoffice/DocumentServer/db:/var/lib/postgresql:Z onlyoffice/documentserver
+        ExecStart=/usr/bin/docker run --name onlyoffice --restart unless-stopped -i -t -d -p 80:80 -p 443:443 -e LETS_ENCRYPT_DOMAIN=your_domain -e LETS_ENCRYPT_MAIL=your_mail -e JWT_ENABLED=true -e JWT_SECRET=your_secret_here -v /srv/onlyoffice/DocumentServer/logs:/var/log/onlyoffice:Z -v /srv/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data:Z -v /srv/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice:Z -v /srv/onlyoffice/DocumentServer/rabbitmq:/var/lib/rabbitmq:Z -v /srv/onlyoffice/DocumentServer/redis:/var/lib/redis:Z -v /srv/onlyoffice/DocumentServer/db:/var/lib/postgresql:Z -v /srv/onlyoffice/DocumentServer/configs:/etc/onlyoffice/documentserver:Z onlyoffice/documentserver
         ExecStart=/bin/touch /var/lib/%N.stamp
 
         [Install]
