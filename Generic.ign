@@ -57,7 +57,7 @@
       {
         "path": "/etc/fail2ban/jail.local",
         "contents": {
-          "source": "data:;base64,W0RFRkFVTFRdCiMgTWF4aW11bSAzIGZhaWx1cmVzOgptYXhlbnRyeSA9IDMKIyBCYW4gaG9zdHMgZm9yIHRlbiBob3VyOgpiYW50aW1lID0gMzYwMAojIE92ZXJyaWRlIC9ldGMvZmFpbDJiYW4vamFpbC5kLzAwLWZpcmV3YWxsZC5jb25mOgpiYW5hY3Rpb24gPSBpcHRhYmxlcy1tdWx0aXBvcnQKW3NzaGRdCmVuYWJsZWQgPSB0cnVlCg=="
+          "source": "data:;base64,W0RFRkFVTFRdCiMgTWF4aW11bSAzIGZhaWx1cmVzOgptYXhlbnRyeSA9IDMKIyBCYW4gaG9zdHMgZm9yIG9uZSBob3VyOgpiYW50aW1lID0gMzYwMAojIE92ZXJyaWRlIC9ldGMvZmFpbDJiYW4vamFpbC5kLzAwLWZpcmV3YWxsZC5jb25mOgpiYW5hY3Rpb24gPSBpcHRhYmxlcy1tdWx0aXBvcnQKW3NzaGRdCmVuYWJsZWQgPSB0cnVlCg=="
         }
       },
       {
@@ -134,7 +134,7 @@
         "name": "postinst.service"
       },
       {
-        "contents": "[Unit]\nDescription=Initial System Setup Part 2\n# We run this after the packages have been overlayed\nAfter=network-online.target\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/firewall-cmd --reload\nExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule \"0 5 0 * * 1\"\nExecStart=/bin/touch /var/lib/%N.stamp\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Initial System Setup Part 2\n# We run this after the packages have been overlayed\nAfter=network-online.target\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule \"0 5 0 * * 1\"\nExecStart=/bin/touch /var/lib/%N.stamp\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "postinst2.service"
       },
