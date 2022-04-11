@@ -29,9 +29,6 @@ systemd:
         RemainAfterExit=yes
         ExecStart=/usr/bin/rpm-ostree install fail2ban firewalld prelockd tuned qemu-guest-agent
         ExecStart=/bin/touch /var/lib/%N.stamp
-        ExecStart=/usr/sbin/setsebool -P container_use_cephfs off
-        ExecStart=/usr/sbin/setsebool -P virt_use_nfs off
-        ExecStart=/usr/sbin/setsebool -P virt_use_samba off
         ExecStart=/usr/bin/sed 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Whonix/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
         ExecStart=/bin/systemctl --no-block reboot
@@ -55,6 +52,17 @@ systemd:
         ExecStart=/usr/bin/docker run --name onlyoffice --restart unless-stopped -i -t -d -p 80:80 -p 443:443 -e LETS_ENCRYPT_DOMAIN=your_domain -e LETS_ENCRYPT_MAIL=your_mail -e JWT_ENABLED=true -e JWT_SECRET=your_secret_here -v /srv/onlyoffice/DocumentServer/logs:/var/log/onlyoffice:Z -v /srv/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data:Z -v /srv/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice:Z -v /srv/onlyoffice/DocumentServer/rabbitmq:/var/lib/rabbitmq:Z -v /srv/onlyoffice/DocumentServer/redis:/var/lib/redis:Z -v /srv/onlyoffice/DocumentServer/db:/var/lib/postgresql:Z onlyoffice/documentserver
         ExecStart=/bin/touch /var/lib/%N.stamp
 
+        [Install]
+        WantedBy=multi-user.target
+    - name: setsebool.service
+      enabled: true
+      contents: |
+        [Service]
+        Type=oneshot 
+        ExecStart=/usr/sbin/setsebool container_use_cephfs off
+        ExecStart=/usr/sbin/setsebool virt_use_nfs off
+        ExecStart=/usr/sbin/setsebool virt_use_samba off
+        RemainAfterExit=yes
         [Install]
         WantedBy=multi-user.target
     - name: docker.service
