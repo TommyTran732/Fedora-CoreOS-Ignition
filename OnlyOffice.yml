@@ -76,6 +76,10 @@ systemd:
       mask: true
 storage:
   files:
+    - path: /etc/ssh/sshd_config.d/60-disable-GSSAPI.conf
+      contents:
+        inline: |
+          GSSAPIAuthentication no
     - path: /etc/zincati/config.d/51-rollout-wariness.toml
       contents:
         inline: |
