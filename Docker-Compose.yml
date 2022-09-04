@@ -28,7 +28,7 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/rpm-ostree install docker-compose fail2ban firewalld prelockd tuned qemu-guest-agent
+        ExecStart=/usr/bin/rpm-ostree install docker-compose fail2ban firewalld tuned qemu-guest-agent
         ExecStart=/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/sed 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Whonix/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
@@ -130,8 +130,6 @@ storage:
       target: ../usr/share/zoneinfo/America/New_York
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service
       target: /usr/lib/systemd/system/tuned.service
-    - path: /etc/systemd/system/multi-user.target.wants/prelockd.service
-      target: /usr/lib/systemd/system/prelockd.service
     - path: /etc/systemd/system/multi-user.target.wants/fail2ban.service
       target: /usr/lib/systemd/system/fail2ban.service
     - path: /etc/systemd/system/kdump.service.target
