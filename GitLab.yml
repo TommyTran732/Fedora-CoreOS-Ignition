@@ -191,7 +191,7 @@ kernel_arguments:
     - sysctl.kernel.kptr_restrict=2
     - sysctl.vm.mmap_rnd_bits=32
     - sysctl.vm.mmap_rnd_compat_bits=16
-    - sysctl.kernel.yama.ptrace_scope=3
+    - sysctl.kernel.yama.ptrace_scope=2
     - sysctl.fs.suid_dumpable=0
     - sysctl.kernel.randomize_va_space=2
     - sysctl.net.ipv4.tcp_rfc1337=1
