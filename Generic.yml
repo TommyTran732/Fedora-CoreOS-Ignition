@@ -162,23 +162,7 @@ kernel_arguments:
     - tsx_async_abort=full,nosmt
     - kvm.nx_huge_pages=force
     - nosmt=force
-    - l1d_flush=on
-    - mmio_stale_data=full,nosmt
-    - random.trust_bootloader=off
-    - random.trust_cpu=off
-    - intel_iommu=on 
-    - amd_iommu=on
-    - iommu.passthrough=0
-    - iommu.strict=1
-    - slab_nomerge
-    - init_on_alloc=1 
-    - init_on_free=1
-    - pti=on
-    - vsyscall=none
-    - page_alloc.shuffle=1
-    - randomize_kstack_offset=on
-    - extra_latent_entropy
-    - debugfs=off
+    - sysctl.kernel.dmesg_restrict=1
     - sysctl.fs.protected_fifos=2
     - sysctl.fs.protected_regular=2
     - sysctl.fs.protected_symlinks=1
@@ -218,4 +202,3 @@ kernel_arguments:
     - sysctl.kernel.perf_event_paranoid=3
     - sysctl.net.ipv6.conf.all.accept_ra=0
     - sysctl.net.ipv6.conf.default.accept_ra=0
-
