@@ -170,7 +170,6 @@ kernel_arguments:
     - random.trust_cpu=off
     - intel_iommu=on 
     - amd_iommu=on
-    - efi=disable_early_pci_dma
     - iommu.passthrough=0
     - iommu.strict=1
     - slab_nomerge
