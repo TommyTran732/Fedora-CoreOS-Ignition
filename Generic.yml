@@ -180,7 +180,6 @@ kernel_arguments:
     - randomize_kstack_offset=on
     - extra_latent_entropy
     - debugfs=off
-    - sysctl.kernel.core_pattern=|/bin/false
     - sysctl.kernel.dmesg_restrict=1
     - sysctl.fs.protected_fifos=2
     - sysctl.fs.protected_regular=2
