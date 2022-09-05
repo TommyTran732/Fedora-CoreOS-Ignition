@@ -171,7 +171,7 @@ kernel_arguments:
     - intel_iommu=on 
     - amd_iommu=on
     - efi=disable_early_pci_dma
-    - iommu.passthrough=0 i
+    - iommu.passthrough=0
     - iommu.strict=1
     - slab_nomerge
     - init_on_alloc=1 
