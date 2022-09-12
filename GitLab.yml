@@ -28,7 +28,7 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/rpm-ostree install fail2ban firewalld tuned qemu-guest-agent
+        ExecStart=/usr/bin/rpm-ostree install firewalld tuned qemu-guest-agent
         ExecStart=/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/sed 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Whonix/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
@@ -99,18 +99,6 @@ storage:
           days = [ "Sun" ]
           start_time = "0:00"
           length_minutes = 60
-    - path: /etc/fail2ban/jail.local
-      contents:
-        inline: |
-          [DEFAULT]
-          # Maximum 3 failures:
-          maxentry = 3
-          # Ban hosts for one hour:
-          bantime = 3600
-          # Override /etc/fail2ban/jail.d/00-firewalld.conf:
-          banaction = iptables-multiport
-          [sshd]
-          enabled = true
     - path: /etc/tuned/active_profile
       overwrite: true
       contents:
@@ -151,8 +139,6 @@ storage:
       target: ../usr/share/zoneinfo/America/New_York
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service
       target: /usr/lib/systemd/system/tuned.service
-    - path: /etc/systemd/system/multi-user.target.wants/fail2ban.service
-      target: /usr/lib/systemd/system/fail2ban.service
     - path: /etc/systemd/system/kdump.service.target
       target: /dev/null
 kernel_arguments:
