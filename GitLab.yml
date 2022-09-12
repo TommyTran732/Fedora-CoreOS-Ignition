@@ -79,9 +79,10 @@ systemd:
       mask: true
 storage:
   files:
-    - path: /etc/ssh/sshd_config.d/60-disable-GSSAPI.conf
+    - path: /etc/ssh/sshd_config.d/10-custom.conf
       contents:
         inline: |
+          X11Forwarding no 
           GSSAPIAuthentication no
     - path: /etc/zincati/config.d/51-rollout-wariness.toml
       contents:
@@ -122,18 +123,12 @@ storage:
       contents: 
         inline: | 
           * hard core 0
-    - path: /etc/ssh/ssh_config.d/60-disable-GSSAPI.conf
+    - path: /etc/ssh/ssh_config.d/10-custom.conf
       overwrite: true
       contents: 
         inline: | 
+          X11Forwarding no 
           GSSAPIAuthentication no
-    - path: /etc/sysctl.d/20-silence-audit.conf
-      contents:
-        inline: |
-          # Raise console message logging level from DEBUG (7) to WARNING (4)
-          # so that audit messages don't get interspersed on the console that
-          # may frustrate a user trying to interactively log in.
-          kernel.printk=4
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/New_York
@@ -191,3 +186,5 @@ kernel_arguments:
     - sysctl.kernel.perf_event_paranoid=3
     - sysctl.net.ipv6.conf.all.accept_ra=0
     - sysctl.net.ipv6.conf.default.accept_ra=0
+    - sysctl.kernel.printk=4
+    
