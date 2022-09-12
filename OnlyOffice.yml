@@ -128,7 +128,6 @@ storage:
       overwrite: true
       contents: 
         inline: | 
-          X11Forwarding no 
           GSSAPIAuthentication no
   links:
     - path: /etc/localtime
