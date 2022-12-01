@@ -31,11 +31,17 @@ systemd:
         ExecStart=/usr/bin/rpm-ostree install docker-compose fail2ban firewalld tuned qemu-guest-agent
         ExecStart=/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/sed 's/nullok//g' /etc/pam.d/system-auth
-        ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Whonix/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
+        ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_security-misc.conf -o /etc/sysctl.d/30_security-misc.conf
+        ExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=3/g' /etc/sysctl.d/30_security-misc.conf
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_silent-kernel-printk.conf -o /etc/sysctl.d/30_silent-kernel-printk.conf
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf
-        ExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=3/g' /etc/sysctl.d/30_security-misc.conf
+        ExecStart=/usr/bin/mkdir -p /etc/systemd/system/NetworkManager.service.d
+        ExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf -o /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+        ExecStart=/usr/bin/mkdir -p /etc/systemd/system/irqbalance.service.d
+        ExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf -o /etc/systemd/system/irqbalance.service.d/99-brace.conf
+        ExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d
+        ExecStart=/usr/bincurl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/limits.conf -o /etc/systemd/system/sshd.service.d/limits.conf
         ExecStart=/bin/systemctl --no-block reboot
 
         [Install]
