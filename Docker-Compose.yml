@@ -66,6 +66,10 @@ systemd:
     - name: rpm-ostree-countme.timer
       enabled: false
       mask: true
+    - name: sshd.service
+      enabled: false
+    - name: sshd.socket
+      enabled: true
 storage:
   files:
     - path: /etc/ssh/sshd_config.d/10-custom.conf
