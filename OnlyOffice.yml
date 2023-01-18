@@ -140,6 +140,7 @@ storage:
       contents:
         inline: |
           GSSAPIAuthentication no
+          VerifyHostKeyDNS yes
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/New_York
