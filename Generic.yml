@@ -28,7 +28,9 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/rpm-ostree install firewalld tuned qemu-guest-agent
+        ExecStart=/usr/bin/sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
+        ExecStart=/usr/bin/systemctl restart systemd-resolved
+        ExecStart=/usr/bin/rpm-ostree install firewalld qemu-guest-agent tuned unbound
         ExecStart=/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/sed 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
@@ -42,6 +44,7 @@ systemd:
         ExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf -o /etc/systemd/system/irqbalance.service.d/99-brace.conf
         ExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/limits.conf -o /etc/systemd/system/sshd.service.d/limits.conf
+        ExecStart=/bin/systemctl disable systemd-resolved
         ExecStart=/bin/systemctl --no-block reboot
 
         [Install]
@@ -59,6 +62,7 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
+        ExecStart=/bin/systemctl enable --now unbound
         ExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule "0 5 0 * * 1"
         ExecStart=/bin/touch /var/lib/%N.stamp
 
@@ -140,6 +144,71 @@ storage:
         inline: |
           GSSAPIAuthentication no
           VerifyHostKeyDNS yes
+    - path: /etc/unbound/unbound.conf
+      overwrite: true
+      contents:
+        inline: |
+          server:
+            trust-anchor-file: dnssec-root.key
+            tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+
+            aggressive-nsec: yes
+            harden-algo-downgrade: yes
+            harden-below-nxdomain: yes
+            harden-dnssec-stripped: yes
+            harden-glue: yes
+            harden-large-queries: yes
+            harden-referral-path: yes
+            harden-short-bufsize: yes
+            qname-minimisation: yes
+            qname-minimisation-strict: yes
+            hide-identity: yes
+            hide-version: yes
+            unwanted-reply-threshold: 10000000
+            use-caps-for-id: yes
+            minimal-responses: yes
+            val-clean-additional: yes
+            rrset-roundrobin: yes
+            ignore-cd-flag: yes
+            do-not-query-localhost: yes
+
+            outgoing-port-permit: 1024-65535
+
+            so-reuseport: yes
+
+            prefetch: yes
+            prefetch-key: yes
+
+          forward-zone:
+            name: "."
+            forward-tls-upstream: yes
+            forward-addr: 8.8.8.8#dns.google
+            forward-addr: 8.8.4.4#dns.google
+            forward-addr: 2001:4860:4860::8888#dns.google
+            forward-addr: 2001:4860:4860::8844#dns.google
+    - path: /etc/systemd/system/unbound.service.d/override.conf
+      contents:
+        inline: |
+          [Unit]
+          CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_SETGID CAP_SETUID CAP_SYS_CHROOT CAP_SYS_RESOURCE CAP_NET_RAW
+          MemoryDenyWriteExecute=true
+          PrivateDevices=true
+          PrivateTmp=true
+          ProtectHome=true
+          ProtectClock=true
+          ProtectControlGroups=true
+          ProtectKernelLogs=true
+          ProtectKernelModules=true
+          # This breaks using socket options like 'so-rcvbuf'. Explicitly disable for visibility.
+          ProtectKernelTunables=true
+          ProtectProc=invisible
+          ProtectSystem=strict
+          RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+          RestrictRealtime=true
+          SystemCallArchitectures=native
+          SystemCallFilter=~@clock @cpu-emulation @debug @keyring @module mount @obsolete @resources
+          RestrictNamespaces=yes
+          LockPersonality=yes
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/New_York

@@ -28,7 +28,9 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/rpm-ostree install docker-compose fail2ban firewalld tuned qemu-guest-agent
+        ExecStart=/usr/bin/sed -i 's/#DNSSEC=no/DNSSEC=yes/g' /etc/systemd/resolved.conf
+        ExecStart=/usr/bin/systemctl restart systemd-resolved
+        ExecStart=/usr/bin/rpm-ostree install docker-compose firewalld qemu-guest-agent tuned unbound
         ExecStart=/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/sed 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
@@ -42,7 +44,26 @@ systemd:
         ExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf -o /etc/systemd/system/irqbalance.service.d/99-brace.conf
         ExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/limits.conf -o /etc/systemd/system/sshd.service.d/limits.conf
+        ExecStart=/bin/systemctl disable systemd-resolved
         ExecStart=/bin/systemctl --no-block reboot
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: postinst2.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Initial System Setup Part 2
+        # We run this after the packages have been overlayed
+        After=network-online.target
+        ConditionPathExists=!/var/lib/%N.stamp
+        ConditionPathExists=/var/lib/postinst.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/bin/systemctl enable --now unbound
+        ExecStart=/bin/touch /var/lib/%N.stamp
 
         [Install]
         WantedBy=multi-user.target
@@ -93,18 +114,6 @@ storage:
           days = [ "Sun" ]
           start_time = "0:00"
           length_minutes = 60
-    - path: /etc/fail2ban/jail.local
-      contents:
-        inline: |
-          [DEFAULT]
-          # Maximum 3 failures:
-          maxentry = 3
-          # Ban hosts for one hour:
-          bantime = 3600
-          # Override /etc/fail2ban/jail.d/00-firewalld.conf:
-          banaction = iptables-multiport
-          [sshd]
-          enabled = true
     - path: /etc/tuned/active_profile
       overwrite: true
       contents:
@@ -154,6 +163,70 @@ storage:
 
           [Install]
           WantedBy=multi-user.target
+    - path: /etc/unbound/unbound.conf
+      contents:
+        inline: |
+          server:
+            trust-anchor-file: dnssec-root.key
+            tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+
+            aggressive-nsec: yes
+            harden-algo-downgrade: yes
+            harden-below-nxdomain: yes
+            harden-dnssec-stripped: yes
+            harden-glue: yes
+            harden-large-queries: yes
+            harden-referral-path: yes
+            harden-short-bufsize: yes
+            qname-minimisation: yes
+            qname-minimisation-strict: yes
+            hide-identity: yes
+            hide-version: yes
+            unwanted-reply-threshold: 10000000
+            use-caps-for-id: yes
+            minimal-responses: yes
+            val-clean-additional: yes
+            rrset-roundrobin: yes
+            ignore-cd-flag: yes
+            do-not-query-localhost: yes
+
+            outgoing-port-permit: 1024-65535
+
+            so-reuseport: yes
+
+            prefetch: yes
+            prefetch-key: yes
+
+          forward-zone:
+            name: "."
+            forward-tls-upstream: yes
+            forward-addr: 8.8.8.8#dns.google
+            forward-addr: 8.8.4.4#dns.google
+            forward-addr: 2001:4860:4860::8888#dns.google
+            forward-addr: 2001:4860:4860::8844#dns.google
+    - path: /etc/systemd/system/unbound.service.d/override.conf
+      contents:
+        inline: |
+          [Unit]
+          CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_SETGID CAP_SETUID CAP_SYS_CHROOT CAP_SYS_RESOURCE CAP_NET_RAW
+          MemoryDenyWriteExecute=true
+          PrivateDevices=true
+          PrivateTmp=true
+          ProtectHome=true
+          ProtectClock=true
+          ProtectControlGroups=true
+          ProtectKernelLogs=true
+          ProtectKernelModules=true
+          # This breaks using socket options like 'so-rcvbuf'. Explicitly disable for visibility.
+          ProtectKernelTunables=true
+          ProtectProc=invisible
+          ProtectSystem=strict
+          RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
+          RestrictRealtime=true
+          SystemCallArchitectures=native
+          SystemCallFilter=~@clock @cpu-emulation @debug @keyring @module mount @obsolete @resources
+          RestrictNamespaces=yes
+          LockPersonality=yes
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/New_York
