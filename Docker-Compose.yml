@@ -49,24 +49,6 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
-    - name: postinst2.service
-      enabled: true
-      contents: |
-        [Unit]
-        Description=Initial System Setup Part 2
-        # We run this after the packages have been overlayed
-        After=network-online.target
-        ConditionPathExists=!/var/lib/%N.stamp
-        ConditionPathExists=/var/lib/postinst.stamp
-
-        [Service]
-        Type=oneshot
-        RemainAfterExit=yes
-        ExecStart=/bin/systemctl enable --now unbound
-        ExecStart=/bin/touch /var/lib/%N.stamp
-
-        [Install]
-        WantedBy=multi-user.target
     - name: setsebool.service
       enabled: true
       contents: |
@@ -230,10 +212,10 @@ storage:
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/New_York
+    - path: /etc/systemd/system/multi-user.target.wants/unbound.service
+      target: /usr/lib/systemd/system/unbound.service
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service
       target: /usr/lib/systemd/system/tuned.service
-    - path: /etc/systemd/system/multi-user.target.wants/fail2ban.service
-      target: /usr/lib/systemd/system/fail2ban.service
     - path: /etc/systemd/system/kdump.service.target
       target: /dev/null
 kernel_arguments:

@@ -62,7 +62,6 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/bin/systemctl enable --now unbound
         ExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule "0 5 0 * * 1"
         ExecStart=/bin/touch /var/lib/%N.stamp
 
@@ -212,6 +211,8 @@ storage:
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/New_York
+    - path: /etc/systemd/system/multi-user.target.wants/unbound.service
+      target: /usr/lib/systemd/system/unbound.service
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service
       target: /usr/lib/systemd/system/tuned.service
     - path: /etc/systemd/system/kdump.service.target
