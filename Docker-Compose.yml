@@ -146,13 +146,27 @@ storage:
           [Install]
           WantedBy=multi-user.target
     - path: /etc/unbound/unbound.conf
+      overwrite: true
       contents:
         inline: |
           server:
-            trust-anchor-file: dnssec-root.key
+            chroot: ""
+
+            auto-trust-anchor-file: "/var/lib/unbound/root.key"
+            trust-anchor-signaling: yes
+            root-key-sentinel: yes
+
             tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+            tls-ciphers: "PROFILE=SYSTEM"
+
+            hide-http-user-agent: yes
+            hide-identity: yes
+            hide-trustanchor: yes
+            hide-version: yes
 
             aggressive-nsec: yes
+            deny-any: yes
+            do-not-query-localhost: yes
             harden-algo-downgrade: yes
             harden-below-nxdomain: yes
             harden-dnssec-stripped: yes
@@ -160,21 +174,19 @@ storage:
             harden-large-queries: yes
             harden-referral-path: yes
             harden-short-bufsize: yes
+            ignore-cd-flag: yes
+            ip-transparent: no
+            max-udp-size: 3072
+            module-config: "validator iterator"
+            minimal-responses: yes
             qname-minimisation: yes
             qname-minimisation-strict: yes
-            hide-identity: yes
-            hide-version: yes
             unwanted-reply-threshold: 10000000
             use-caps-for-id: yes
-            minimal-responses: yes
             val-clean-additional: yes
-            rrset-roundrobin: yes
-            ignore-cd-flag: yes
-            do-not-query-localhost: yes
+            zonemd-permissive-mode: no
 
             outgoing-port-permit: 1024-65535
-
-            so-reuseport: yes
 
             prefetch: yes
             prefetch-key: yes
@@ -190,7 +202,6 @@ storage:
       contents:
         inline: |
           [Unit]
-          CapabilityBoundingSet=CAP_NET_BIND_SERVICE CAP_SETGID CAP_SETUID CAP_SYS_CHROOT CAP_SYS_RESOURCE CAP_NET_RAW
           MemoryDenyWriteExecute=true
           PrivateDevices=true
           PrivateTmp=true
@@ -202,7 +213,6 @@ storage:
           # This breaks using socket options like 'so-rcvbuf'. Explicitly disable for visibility.
           ProtectKernelTunables=true
           ProtectProc=invisible
-          ProtectSystem=strict
           RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
           RestrictRealtime=true
           SystemCallArchitectures=native
