@@ -162,27 +162,18 @@ storage:
             hide-trustanchor: yes
             hide-version: yes
 
-            aggressive-nsec: yes
             deny-any: yes
             do-not-query-localhost: yes
             harden-algo-downgrade: yes
-            harden-below-nxdomain: yes
-            harden-dnssec-stripped: yes
-            harden-glue: yes
             harden-large-queries: yes
             harden-referral-path: yes
             harden-short-bufsize: yes
             ignore-cd-flag: yes
-            ip-transparent: no
             max-udp-size: 3072
             module-config: "validator iterator"
-            minimal-responses: yes
-            qname-minimisation: yes
             qname-minimisation-strict: yes
             unwanted-reply-threshold: 10000000
             use-caps-for-id: yes
-            val-clean-additional: yes
-            zonemd-permissive-mode: no
 
             outgoing-port-permit: 1024-65535
 
