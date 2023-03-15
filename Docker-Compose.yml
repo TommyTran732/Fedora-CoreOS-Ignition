@@ -163,7 +163,7 @@ storage:
           ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1
           ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512
           ExecStart=/usr/bin/sha512sum -c runsc.sha512 -c containerd-shim-runsc-v1.sha512
-          ExecStart=/usr/bin/rm -f *.sha512
+          ExecStart=/usr/bin/rm -f runsc.sha512 containerd-shim-runsc-v1.sha512
           ExecStart=/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1
           ExecStart=/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin
 
