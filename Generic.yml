@@ -144,6 +144,28 @@ storage:
         inline: |
           GSSAPIAuthentication no
           VerifyHostKeyDNS yes
+    - path: /etc/systemd/system/gvisor-updater.service
+      contents:
+        inline: |
+          [Unit]
+          Description=gVisor Update
+          Require=network-online.target
+          Before=docker.service
+
+          [Service]
+          WorkingDirectory=/var/roothome
+          Type=oneshot
+          ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc
+          ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512
+          ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1
+          ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512
+          ExecStart=/usr/bin/sha512sum -c runsc.sha512 -c containerd-shim-runsc-v1.sha512
+          ExecStart=/usr/bin/rm -f *.sha512
+          ExecStart=/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1
+          ExecStart=/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin
+
+          [Install]
+          WantedBy=multi-user.target
     - path: /etc/unbound/unbound.conf
       overwrite: true
       contents:
@@ -208,6 +230,26 @@ storage:
           SystemCallFilter=~@clock @cpu-emulation @debug @keyring @module mount @obsolete @resources
           RestrictNamespaces=yes
           LockPersonality=yes
+    - path: /etc/docker/daemon.json
+      contents:
+        inline: |
+          {
+              "default-runtime": "runsc-ptrace",
+              "runtimes": {
+                  "runsc-ptrace": {
+                      "path": "/var/usrlocal/bin/runsc",
+                      "runtimeArgs": [
+                          "--platform=ptrace"
+                      ]
+                  },
+                "runsc-kvm": {
+                      "path": "/var/usrlocal/bin/runsc",
+                      "runtimeArgs": [
+                          "--platform=kvm"
+                      ]
+                  }
+              }
+          }
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/New_York
