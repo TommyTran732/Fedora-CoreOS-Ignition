@@ -240,13 +240,15 @@ storage:
                   "runsc-ptrace": {
                       "path": "/var/usrlocal/bin/runsc",
                       "runtimeArgs": [
-                          "--platform=ptrace"
+                          "--platform=ptrace",
+                          "--network=host"
                       ]
                   },
                 "runsc-kvm": {
                       "path": "/var/usrlocal/bin/runsc",
                       "runtimeArgs": [
-                          "--platform=kvm"
+                          "--platform=kvm",
+                          "--network=host"
                       ]
                   }
               }
