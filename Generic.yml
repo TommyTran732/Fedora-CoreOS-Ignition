@@ -63,7 +63,7 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule "0 5 0 * * 1"
+        ExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule "0 15 0 * * 0"
         ExecStart=/bin/touch /var/lib/%N.stamp
 
         [Install]
