@@ -32,7 +32,6 @@ systemd:
         ExecStart=/usr/bin/systemctl restart systemd-resolved
         ExecStart=/usr/bin/rpm-ostree install firewalld qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/rpm-ostree override remove cifs-utils samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac
-        ExecStart=/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/sed 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_security-misc.conf -o /etc/sysctl.d/30_security-misc.conf
@@ -49,6 +48,7 @@ systemd:
         ExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/limits.conf -o /etc/systemd/system/sshd.service.d/limits.conf
         ExecStart=/bin/systemctl disable systemd-resolved
+        ExecStart=/bin/touch /var/lib/%N.stamp
         ExecStart=/bin/systemctl --no-block reboot
 
         [Install]
