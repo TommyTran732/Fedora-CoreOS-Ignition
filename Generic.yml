@@ -216,7 +216,7 @@ storage:
     - path: /etc/systemd/system/unbound.service.d/override.conf
       contents:
         inline: |
-          [Unit]
+          [Service]
           MemoryDenyWriteExecute=true
           PrivateDevices=true
           PrivateTmp=true
