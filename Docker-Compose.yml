@@ -84,6 +84,7 @@ systemd:
         ExecStart=/usr/bin/rm -f runsc.sha512 containerd-shim-runsc-v1.sha512
         ExecStart=/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1
         ExecStart=/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin
+        ExecStart=/usr/bin/chcon system_u:object_r:container_runtime_exec_t:s0 /var/usrlocal/bin/runsc
 
         [Install]
         WantedBy=multi-user.target
