@@ -239,8 +239,15 @@ storage:
       contents:
         inline: |
           {
-              "default-runtime": "runsc-ptrace",
+              "default-runtime": "runsc-systrap",
               "runtimes": {
+                  "runsc-systrap": {
+                      "path": "/var/usrlocal/bin/runsc",
+                      "runtimeArgs": [
+                          "--platform=systrap",
+                          "--network=host"
+                      ]
+                  },
                   "runsc-ptrace": {
                       "path": "/var/usrlocal/bin/runsc",
                       "runtimeArgs": [

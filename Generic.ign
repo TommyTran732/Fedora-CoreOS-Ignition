@@ -127,7 +127,7 @@
         "path": "/etc/docker/daemon.json",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/7yPsQ6DMAxEd77C8kyUHYmh31F1cGkoiJAgx6FDxb9XAdoCY4cukeJ7vvM9MwAAvJmaohXF0UnbGywAObpQqUGYKoP5gq1ywAKWxff0S26VWR1ImuSnR2IdA1tfkdXX1ul5b7XemqWIE99TynknzoBSgyWpPffl7rgD5Iw8PHdl44PgDrh8flN+LNGN/V8bpLzfz8+Wd8peAQAA///Ut7xexgEAAA=="
+          "source": "data:;base64,H4sIAAAAAAAC/7yPwQqDMBBE735FyNmQu+Ch31F62NpYxZiE3Y2lFP+9RG1Rj6V4CWTn7czOKxNCCHkzNUTLCqPjtjeyEBKjo0rRkxghyHzmFp1kIebNz3SFrqVJDsBNctQDoI6E1ldg9bV1elpcvNduKeOE9xRz3ogToFSwwLXHvtyet6Oc4YfHrmw8sdwAl+9vzPc1AiNU5tAWS+QfS3RDf2iDlPf7+dn8jtk7AAD//8zPuZeOAgAA"
         }
       }
     ],
