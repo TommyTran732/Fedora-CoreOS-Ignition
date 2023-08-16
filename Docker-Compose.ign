@@ -117,6 +117,14 @@
       },
       {
         "overwrite": true,
+        "path": "/etc/sysconfig/chronyd",
+        "contents": {
+          "compression": "",
+          "source": "data:,%23%20Command-line%20options%20for%20chronyd%0AOPTIONS%3D%22-F%201%22%0A"
+        }
+      },
+      {
+        "overwrite": true,
         "path": "/etc/unbound/unbound.conf",
         "contents": {
           "compression": "gzip",

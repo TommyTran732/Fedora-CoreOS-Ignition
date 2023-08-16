@@ -173,6 +173,12 @@ storage:
 
           [Install]
           WantedBy=multi-user.target
+    - path: /etc/sysconfig/chronyd
+      overwrite: true
+      contents:
+        inline: |
+          # Command-line options for chronyd
+          OPTIONS="-F 1"
     - path: /etc/unbound/unbound.conf
       overwrite: true
       contents:
