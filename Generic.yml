@@ -245,25 +245,54 @@ storage:
           {
               "default-runtime": "runsc-systrap",
               "runtimes": {
+                  "runsc-kvm": {
+                      "path": "/usr/bin/runsc",
+                      "runtimeArgs": [
+                          "--platform=kvm",
+                          "--network=host"
+                      ]
+                  },
                   "runsc-systrap": {
-                      "path": "/var/usrlocal/bin/runsc",
+                      "path": "/usr/bin/runsc",
                       "runtimeArgs": [
                           "--platform=systrap",
                           "--network=host"
                       ]
                   },
-                  "runsc-ptrace": {
-                      "path": "/var/usrlocal/bin/runsc",
-                      "runtimeArgs": [
-                          "--platform=ptrace",
-                          "--network=host"
-                      ]
-                  },
-                  "runsc-kvm": {
-                      "path": "/var/usrlocal/bin/runsc",
+                  "runsc-kvm --host-uds=open": {
+                      "path": "/usr/bin/runsc",
                       "runtimeArgs": [
                           "--platform=kvm",
-                          "--network=host"
+                          "--network=host",
+                          "--host-uds=open"
+                      ]
+                  },
+                  "runsc-systrap --host-uds=open": {
+                      "path": "/usr/bin/runsc",
+                      "runtimeArgs": [
+                          "--platform=systrap",
+                          "--network=host",
+                          "--host-uds=open"
+                      ]
+                  },
+                  "runsc-kvm-debug": {
+                      "path": "/usr/bin/runsc",
+                      "runtimeArgs": [
+                          "--platform=kvm",
+                          "--network=host",
+                          "--debug-log=/tmp/runsc-kvm/",
+                          "--debug",
+                          "--strace"
+                      ]
+                  },
+                  "runsc-systrap-debug": {
+                      "path": "/usr/bin/runsc",
+                      "runtimeArgs": [
+                          "--platform=systrap",
+                          "--network=host",
+                          "--debug-log=/tmp/runsc-systrap/",
+                          "--debug",
+                          "--strace"
                       ]
                   }
               }

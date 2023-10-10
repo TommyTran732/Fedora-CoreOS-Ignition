@@ -134,7 +134,7 @@
         "path": "/etc/docker/daemon.json",
         "contents": {
           "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/7yPwQqDMBBE735FyNmQu+Ch31F62NpYxZiE3Y2lFP+9RG1Rj6V4CWTn7czOKxNCCHkzNUTLCqPjtjeyEBKjo0rRkxghyHzmFp1kIebNz3SFrqVJDsBNctQDoI6E1ldg9bV1elpcvNduKeOE9xRz3ogToFSwwLXHvtyet6Oc4YfHrmw8sdwAl+9vzPc1AiNU5tAWS+QfS3RDf2iDlPf7+dn8jtk7AAD//8zPuZeOAgAA"
+          "source": "data:;base64,H4sIAAAAAAAC/8xSy2rDMBC8+yuEzl50D/jQ7yg9KLbiBFkPtCuXUvLvRbITqiJKQ02Si8Ga0Wh2Zj8bxhjjgzrIOBGEaOlkFN8xHqLFHvADKUjP24W34sh3bLl5OcUe9GyK4wx5ScekJiIGsT9Zkbmr3HeBJPsSxqT8WoCZAOAnSQcXTJeeaWsMq+jdBd0dHRIvCG/Xv3P70/VlwDs4L7PcxL2eDQNIdyAO2Dmv7PN0UGWUXm+t6RHD/r22LQfWs4FB7eP45H1mjzC5sRNkvLiaF7/Q61BKuVc3r8T9UvrnIlSTWjU3T6tZvufmKwAA//9hTB1H4QUAAA=="
         }
       }
     ],
