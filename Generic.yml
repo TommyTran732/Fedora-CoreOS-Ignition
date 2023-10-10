@@ -123,6 +123,11 @@ storage:
       contents:
         inline: |
           X11Forwarding no
+          HostKeyAlgorithms ssh-ed25519
+          PubkeyAcceptedKeyTypes ssh-ed25519
+          Ciphers aes256-gcm@openssh.com
+          MACs -*
+          KerberosAuthentication no
           GSSAPIAuthentication no
     - path: /etc/zincati/config.d/51-rollout-wariness.toml
       contents:

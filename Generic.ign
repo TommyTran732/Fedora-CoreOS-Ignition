@@ -50,7 +50,7 @@
         "path": "/etc/ssh/sshd_config.d/10-custom.conf",
         "contents": {
           "compression": "",
-          "source": "data:,X11Forwarding%20no%0AGSSAPIAuthentication%20no%0A"
+          "source": "data:,X11Forwarding%20no%0AHostKeyAlgorithms%20ssh-ed25519%0APubkeyAcceptedKeyTypes%20ssh-ed25519%0ACiphers%20aes256-gcm%40openssh.com%0AMACs%20-*%0AKerberosAuthentication%20no%0AGSSAPIAuthentication%20no%0A"
         }
       },
       {
