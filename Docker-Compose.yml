@@ -45,6 +45,7 @@ systemd:
         ExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf -o /etc/systemd/system/irqbalance.service.d/99-brace.conf
         ExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d
         ExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf -o /etc/systemd/system/sshd.service.d/override.conf
+        ExecStart=/usr/bin/curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf -o /etc/ssh/sshd_config.d/10-custom.conf
         ExecStart=/usr/bin/systemctl disable systemd-resolved
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
@@ -101,16 +102,6 @@ systemd:
       enabled: true
 storage:
   files:
-    - path: /etc/ssh/sshd_config.d/10-custom.conf
-      contents:
-        inline: |
-          X11Forwarding no
-          HostKeyAlgorithms ssh-ed25519
-          PubkeyAcceptedKeyTypes ssh-ed25519
-          Ciphers aes256-gcm@openssh.com
-          MACs -*
-          KerberosAuthentication no
-          GSSAPIAuthentication no
     - path: /etc/zincati/config.d/51-rollout-wariness.toml
       contents:
         inline: |
