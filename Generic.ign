@@ -81,7 +81,7 @@
         "path": "/etc/systemd/zram-generator.conf",
         "contents": {
           "compression": "",
-          "source": "data:;base64,IyBUaGlzIGNvbmZpZyBmaWxlIGVuYWJsZXMgYSAvZGV2L3pyYW0wIGRldmljZSB3aXRoIHRoZSBkZWZhdWx0IHNldHRpbmdzClt6cmFtMF0KenJhbS1mcmFjdGlvbiA9IDEKbWF4LXpyYW0tc2l6ZSA9IDgxOTIKY29tcHJlc3Npb24tYWxnb3JpdGhtID0genN0ZAo="
+          "source": "data:,%5Bzram0%5D%0Azram-fraction%20%3D%201%0Amax-zram-size%20%3D%208192%0Acompression-algorithm%20%3D%20zstd%0A"
         }
       },
       {

@@ -150,7 +150,6 @@ storage:
       overwrite: true
       contents:
         inline: |
-          # This config file enables a /dev/zram0 device with the default settings
           [zram0]
           zram-fraction = 1
           max-zram-size = 8192
