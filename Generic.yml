@@ -154,6 +154,7 @@ storage:
           [zram0]
           zram-fraction = 1
           max-zram-size = 8192
+          compression-algorithm = zstd
     - path: /etc/security/limits.d/30-disable-coredump.conf
       overwrite: true
       contents:

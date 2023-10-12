@@ -81,7 +81,7 @@
         "path": "/etc/systemd/zram-generator.conf",
         "contents": {
           "compression": "",
-          "source": "data:;base64,IyBUaGlzIGNvbmZpZyBmaWxlIGVuYWJsZXMgYSAvZGV2L3pyYW0wIGRldmljZSB3aXRoIHRoZSBkZWZhdWx0IHNldHRpbmdzClt6cmFtMF0KenJhbS1mcmFjdGlvbiA9IDEKbWF4LXpyYW0tc2l6ZSA9IDgxOTIK"
+          "source": "data:;base64,IyBUaGlzIGNvbmZpZyBmaWxlIGVuYWJsZXMgYSAvZGV2L3pyYW0wIGRldmljZSB3aXRoIHRoZSBkZWZhdWx0IHNldHRpbmdzClt6cmFtMF0KenJhbS1mcmFjdGlvbiA9IDEKbWF4LXpyYW0tc2l6ZSA9IDgxOTIKY29tcHJlc3Npb24tYWxnb3JpdGhtID0genN0ZAo="
         }
       },
       {
