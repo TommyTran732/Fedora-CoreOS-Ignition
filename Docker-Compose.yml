@@ -2,9 +2,9 @@ variant: fcos
 version: 1.4.0
 passwd:
   users:
-    - name: tomster
+    - name: shadowtux
       ssh_authorized_keys:
-        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVwG+Pt0LnDJqUJaHrl830mEBvI2N/qfnlfdnSRM7LJ
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFvoFp2f5Qc4oj4RFwgD3TwNgNcrqANnGPJA/5oOOlr
       groups:
         - wheel
         - sudo
