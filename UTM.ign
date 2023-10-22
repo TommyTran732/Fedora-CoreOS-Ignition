@@ -39,21 +39,13 @@
         ],
         "name": "tomster",
         "sshAuthorizedKeys": [
-          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDbVNnQVs6SVW1GvQQ7FE6afs08LMtTNmDIPtoT3+Aqa7I3HOZRgWpqh3kIz3OTOCs2zl5JHCJDaANvadjGFcdtSI+zy7bozpj5TJWGDnGkH3Rp2SBBRK6twjjrN9nbTJ2ihlkXEOA2e3SDFXEkwu6t0fLZelBUk3FWnbK/xPmsRUuEF90oxpXpZIPeFbE4nNK3HarNPL+XzA2xzSqrwNk9ICCJ9MS3OcnPpWIQR3LKLEgyPFKwy4K6WzQyNvr5uFAcV9Zrq9TM93HSOUdtFFXcDeAEu76cQorsgAyU7XbAPqSza780qF/kHhQ+Hb4q1Wmyk62nAu7dT86lujpzIWXOdFJZyb3WWjP21qe7bk8A1S5Q9lfto/bo0Rs2wHbBRtoxMrb8DTC3EtErjN/IXMZrqMZpj3hNiNxP3PYKXLWb6AbuWjQO5d4Tu4vv4QWKGyJwvkI55V0sI9a2lLODAK+x9z4K7cbGLFHqdEFCLkq7sDU3zd9q68//M/LQO3AO9sMpd8jHDg0xdgdfh5dP6grUDypz1h/HtXCT+w3Ka2geitqoTMv6y0WO1vT+c97mvbjf24rwoLiPe7qVPnxKTRPNRH1vhmOLeZsQva2ATXBCR/J+Xn4JzSWOt17N/s5ldvfD+d6FrYzDNw664efaXMIWCbVJtlKvas0I9iM2VYRM7Q==",
-          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDcmfm4RKkVC02QrF6ajGVVlbO3+AiVVyfoO4jbUjNbBNarVNgOHNC2lyxo3DJG33uKg74/e6fwj2mr2qW7Bq/yefmMqZrwY6ZyBDOOnkmsaMjX3Q5dJVRvHaYDShseJEBVtALVZFPyYQhdCdCEI/pO1Oeh+bDgLFinWoKAx6Fau8ArjbCsU4WfmgTUQae8AkE5e+uj+2T7Nq195CgfWEnAcKTKEYTr+6Y5a8L/w6ugto41bXvbwWhgogMT7epkcsfSF14M5hi0kBTawmzSi6HsqnAs4PWadaN0IMtfZJ/ZdpNw2QjdDKReGc3AcvEUQU9840RgVmXLp0JT5kdHJZabYcpPaDRwTw3A/oNIEZCzOKve8j4aFrf003etUn7Vq5wchyqyRrk2KRnK61v8BOtF7REs5jw/hQ1PdbsGewhxmGQy3gJ670BS1apQDvrZVHUqIsl3SGcykBBQvLu0F5erZ3ENPAk0wb++ygBtqsoF0wV9rv+L/VEh7233/TUQbH6K2ggZg5SvQnjUA4JqnBcSPf8kMlEGCU+8yeGSF086vL3gpVF6VpvUa34Sh+RbLGtNPVcoTSa2yLwSHdU0NmA9Lj/0M3+ty+uK4pBU86zIIAmyB9NBN/TcpeR7PVi3J991EbVLZgwzAK7S/LAmE6vWLG1IoQbDDN7QCB9XWiFiaQ=="
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVwG+Pt0LnDJqUJaHrl830mEBvI2N/qfnlfdnSRM7LJ"
         ]
       }
     ]
   },
   "storage": {
     "files": [
-      {
-        "path": "/etc/ssh/sshd_config.d/10-custom.conf",
-        "contents": {
-          "compression": "",
-          "source": "data:,X11Forwarding%20no%0AGSSAPIAuthentication%20no%0A"
-        }
-      },
       {
         "path": "/etc/zincati/config.d/51-rollout-wariness.toml",
         "contents": {
@@ -70,10 +62,26 @@
       },
       {
         "overwrite": true,
+        "path": "/etc/tuned/active_profile",
+        "contents": {
+          "compression": "",
+          "source": "data:,virtual-guest%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/tuned/profile_mode",
+        "contents": {
+          "compression": "",
+          "source": "data:,manual%0A"
+        }
+      },
+      {
+        "overwrite": true,
         "path": "/etc/systemd/zram-generator.conf",
         "contents": {
           "compression": "",
-          "source": "data:;base64,IyBUaGlzIGNvbmZpZyBmaWxlIGVuYWJsZXMgYSAvZGV2L3pyYW0wIGRldmljZSB3aXRoIHRoZSBkZWZhdWx0IHNldHRpbmdzClt6cmFtMF0KenJhbS1mcmFjdGlvbiA9IDEKbWF4LXpyYW0tc2l6ZSA9IDgxOTIK"
+          "source": "data:,%5Bzram0%5D%0Azram-fraction%20%3D%201%0Amax-zram-size%20%3D%208192%0Acompression-algorithm%20%3D%20zstd%0A"
         }
       },
       {
@@ -91,9 +99,44 @@
           "compression": "",
           "source": "data:,GSSAPIAuthentication%20no%0AVerifyHostKeyDNS%20yes%0A"
         }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/sysconfig/chronyd",
+        "contents": {
+          "compression": "",
+          "source": "data:,%23%20Command-line%20options%20for%20chronyd%0AOPTIONS%3D%22-F%201%22%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/unbound/unbound.conf",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/6xSQWvcPBC9768Q/s5jezfZ5MNQ6CWFQktL00uPE2lsD5ElZzTa1Pn1RbtdlyyFQqkNxp4373ne0ySSA0m3McaOEqN2pqo2G2MwawSVnBQw2DEK9OypM1VzQGk8PzQ5PMQcXFNY9SMt1caYV4TEQ0DPYejMQmljTOmER1ogUVAO5E9A4fkElkThIQdXftOQ2iYl35RqaiweYe7ZolKqreiZxfNIkjpTff7y6d37D3dv7r/df737eDQxsiMYVWfIiQRwoKDnYY4YuzKJLq+KRxMnD6/qB5LEMaxDOwoLYPhFRnEUAP0QwcXnMAg6ugA9ykDwlEmY0gUm1JMIephRxwssjfGYTp/4ZdXkIUQhsA56j2vKE36H7GY4dV61t7tSjC57AhtDz0NnqgN6dqhRDCtJeSnH9xRwIpg48MQJlWOApMJ2DS2HZwxKDoRmv4COQmmM3nVm256u0pQILM4J+ijAbs0rZh0ihwHm4mUmmVgLcXcNN/v91b70zCUEtav983dZm59CfZRnFAcvMVDZ2zJzZ6q6GDhjZTPynFQIp7PUGUPnpDPbuty7t//vr/5LZLOwLrX1MbveoxC4kGobp9/w2rr9C97upr3prm/b9vTottvtPxBp2z+K9P3mRwAAAP//CV2iuOQDAAA="
+        }
+      },
+      {
+        "path": "/etc/systemd/system/unbound.service.d/override.conf",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/2yRQWvcPBCG7/srBN8hp+T43Qxekt12ycYsiUsLpRRZfrMZLGvMzMjEl/72oqUbauhJo2dmmNGj7y+QmQJ+bJ4wsiwPSMtXIcPuHSEbKpOMzUlo9oYHlFJdsXacrnc2BPvMI1bgPnIY1oSTCcdPwnnSVeYRkhCPfP4XfuI+x+v0/1z7Ruo6gR/UZaV0dsphgDmejDipizTA3SjfSpi7/Hpz53bvU6RAFhfXk/ouwr2yuJmUOopky916YptTKVovcxIOFaVLU8TmGWpCwbZ9L1Dd+5EiQavt/ueh2bXuz/l/CZpdezw0jyX80hy+ffQ+w0ejq7eXRQ3jvY9xK+GNysws0Cp5o/nv9J6iQapfdSiKXR2mfIsxR1/e7+oeXT67esAixU49Xvy5kXMyV3OnHGFwtUA5S4B+7NP4ETr58tULdHPkMJwgyskXSRf2OwAA///OGG3DOAIAAA=="
+        }
       }
     ],
     "links": [
+      {
+        "path": "/etc/localtime",
+        "target": "../usr/share/zoneinfo/America/New_York"
+      },
+      {
+        "path": "/etc/systemd/system/multi-user.target.wants/unbound.service",
+        "target": "/usr/lib/systemd/system/unbound.service"
+      },
+      {
+        "path": "/etc/systemd/system/multi-user.target.wants/tuned.service",
+        "target": "/usr/lib/systemd/system/tuned.service"
+      },
       {
         "path": "/etc/systemd/system/kdump.service.target",
         "target": "/dev/null"
@@ -103,7 +146,7 @@
   "systemd": {
     "units": [
       {
-        "contents": "[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/rpm-ostree install firewalld qemu-guest-agent\nExecStart=/usr/bin/rpm-ostree override remove cifs-utils samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac docker toolbox podman\nExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_security-misc.conf -o /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=3/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all=1/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all=1/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_silent-kernel-printk.conf -o /etc/sysctl.d/30_silent-kernel-printk.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_security-misc_kexec-disable.conf -o /etc/sysctl.d/30_security-misc_kexec-disable.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/NetworkManager.service.d\nExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf -o /etc/systemd/system/NetworkManager.service.d/99-brace.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/irqbalance.service.d\nExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf -o /etc/systemd/system/irqbalance.service.d/99-brace.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/limits.conf -o /etc/systemd/system/sshd.service.d/limits.conf\nExecStart=/bin/touch /var/lib/%N.stamp\nExecStart=/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf\nExecStart=/usr/bin/echo \"allow 10.0.2.2/32\" \u003e\u003e /etc/chrony.conf\nExecStart=/usr/bin/systemctl restart chronyd\nExecStart=/usr/bin/rpm-ostree install firewalld qemu-guest-agent tuned unbound\nExecStart=/usr/bin/rpm-ostree override remove cifs-utils samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac\nExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_security-misc.conf -o /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=1/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all=1/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all=1/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_silent-kernel-printk.conf -o /etc/sysctl.d/30_silent-kernel-printk.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_security-misc_kexec-disable.conf -o /etc/sysctl.d/30_security-misc_kexec-disable.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/NetworkManager.service.d\nExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf -o /etc/systemd/system/NetworkManager.service.d/99-brace.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/irqbalance.service.d\nExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf -o /etc/systemd/system/irqbalance.service.d/99-brace.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf -o /etc/systemd/system/sshd.service.d/override.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf -o /etc/ssh/sshd_config.d/10-custom.conf\nExecStart=/usr/bin/systemctl disable systemd-resolved\nExecStart=/usr/bin/touch /var/lib/%N.stamp\nExecStart=/usr/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "postinst.service"
       },
@@ -111,6 +154,10 @@
         "contents": "[Service]\nType=oneshot\nExecStart=/usr/sbin/setsebool container_use_cephfs off\nExecStart=/usr/sbin/setsebool virt_use_nfs off\nExecStart=/usr/sbin/setsebool virt_use_samba off\nRemainAfterExit=yes\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "setsebool.service"
+      },
+      {
+        "enabled": false,
+        "name": "docker.service"
       },
       {
         "enabled": true,
