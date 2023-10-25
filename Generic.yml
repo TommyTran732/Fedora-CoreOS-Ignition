@@ -315,6 +315,8 @@ storage:
       target: /dev/null
     - path: /etc/systemd/system/debug-shell.service
       target: /dev/null
+    - path: /etc/systemd/system/ctrl-alt-del.target
+      target: /dev/null
 kernel_arguments:
   should_exist:
     - spectre_v2=on

@@ -167,6 +167,10 @@
       {
         "path": "/etc/systemd/system/debug-shell.service",
         "target": "/dev/null"
+      },
+      {
+        "path": "/etc/systemd/system/ctrl-alt-del.target",
+        "target": "/dev/null"
       }
     ]
   },
