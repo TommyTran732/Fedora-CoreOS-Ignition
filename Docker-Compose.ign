@@ -1,0 +1,220 @@
+{
+  "ignition": {
+    "version": "3.3.0"
+  },
+  "kernelArguments": {
+    "shouldExist": [
+      "spectre_v2=on",
+      "spec_store_bypass_disable=on",
+      "l1tf=full,force",
+      "mds=full,nosmt",
+      "tsx=off",
+      "tsx_async_abort=full,nosmt",
+      "kvm.nx_huge_pages=force",
+      "nosmt=force",
+      "l1d_flush=on",
+      "mmio_stale_data=full,nosmt",
+      "random.trust_bootloader=off",
+      "random.trust_cpu=off",
+      "intel_iommu=on",
+      "amd_iommu=on",
+      "iommu.passthrough=0 iommu.strict=1",
+      "slab_nomerge",
+      "init_on_alloc=1",
+      "init_on_free=1",
+      "pti=on",
+      "vsyscall=none",
+      "page_alloc.shuffle=1",
+      "randomize_kstack_offset=on",
+      "extra_latent_entropy",
+      "debugfs=off"
+    ]
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "sudo"
+        ],
+        "name": "tomster",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVwG+Pt0LnDJqUJaHrl830mEBvI2N/qfnlfdnSRM7LJ"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/zincati/config.d/51-rollout-wariness.toml",
+        "contents": {
+          "compression": "",
+          "source": "data:,%5Bidentity%5D%0Arollout_wariness%20%3D%200%0A"
+        }
+      },
+      {
+        "path": "/etc/zincati/config.d/55-updates-strategy.toml",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/2SNMarEMAxEe51C6ADB1S8+5BRbGmNMLLIGRw62TMieflGRats3b2b8PHNSHgGG9qS837gindxLy2UjePLlQQG0HBw/TdjM2rZUjRD4H3e5iuR2hQA53QNX9EivKYT2lrpGK9qK+3eOoLLs+o5Hkals+p+DbwAAAP//4Po2vKAAAAA="
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/issue",
+        "contents": {
+          "compression": "",
+          "source": "data:,Authorized%20uses%20only.%20All%20activity%20may%20be%20monitored%20and%20reported.%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/issue.net",
+        "contents": {
+          "compression": "",
+          "source": "data:,Authorized%20uses%20only.%20All%20activity%20may%20be%20monitored%20and%20reported.%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/tuned/active_profile",
+        "contents": {
+          "compression": "",
+          "source": "data:,virtual-guest%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/tuned/profile_mode",
+        "contents": {
+          "compression": "",
+          "source": "data:,manual%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/systemd/zram-generator.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,%5Bzram0%5D%0Azram-fraction%20%3D%201%0Amax-zram-size%20%3D%208192%0Acompression-algorithm%20%3D%20zstd%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/security/limits.d/30-disable-coredump.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,*%20hard%20core%200%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/ssh/ssh_config.d/10-custom.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,GSSAPIAuthentication%20no%0AVerifyHostKeyDNS%20yes%0A"
+        }
+      },
+      {
+        "path": "/etc/systemd/system/automatic-updater.service",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/4yQsU78MAyHdz9Fpf/cyxNkuL8OIVaO6oaqQ0hMz2pqB8cB+vYM1QmBGNh+0vf5GzwOTDbBCWtUKkbC/thM1mAUu6GkYKhwfDFUnyQuqIeK+kYR4RFfGylWz2jvoksvnInxYEFntC/84wzG874mGCqqVxGDe5VW9nkRXYjnEylGE928K8GuzsTtoT7KWqSiSzcD/t19YDxbUPOuVXXPxG4m60rLGX5h30N/1Vrp+gRPW0EvjPUqBjA+cLWQ8wSXwIbp/+bXlo36VlFvn/gMAAD//9CerLZjAQAA"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/sysconfig/chronyd",
+        "contents": {
+          "compression": "",
+          "source": "data:,%23%20Command-line%20options%20for%20chronyd%0AOPTIONS%3D%22-F%201%22%0A"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/unbound/unbound.conf",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/6xSQWvcPBC9768Q/s5jezfZ5MNQ6CWFQktL00uPE2lsD5ElZzTa1Pn1RbtdlyyFQqkNxp4373ne0ySSA0m3McaOEqN2pqo2G2MwawSVnBQw2DEK9OypM1VzQGk8PzQ5PMQcXFNY9SMt1caYV4TEQ0DPYejMQmljTOmER1ogUVAO5E9A4fkElkThIQdXftOQ2iYl35RqaiweYe7ZolKqreiZxfNIkjpTff7y6d37D3dv7r/df737eDQxsiMYVWfIiQRwoKDnYY4YuzKJLq+KRxMnD6/qB5LEMaxDOwoLYPhFRnEUAP0QwcXnMAg6ugA9ykDwlEmY0gUm1JMIephRxwssjfGYTp/4ZdXkIUQhsA56j2vKE36H7GY4dV61t7tSjC57AhtDz0NnqgN6dqhRDCtJeSnH9xRwIpg48MQJlWOApMJ2DS2HZwxKDoRmv4COQmmM3nVm256u0pQILM4J+ijAbs0rZh0ihwHm4mUmmVgLcXcNN/v91b70zCUEtav983dZm59CfZRnFAcvMVDZ2zJzZ6q6GDhjZTPynFQIp7PUGUPnpDPbuty7t//vr/5LZLOwLrX1MbveoxC4kGobp9/w2rr9C97upr3prm/b9vTottvtPxBp2z+L/AgAAP//qRxiA+IDAAA="
+        }
+      },
+      {
+        "path": "/etc/systemd/system/unbound.service.d/override.conf",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/2yRQWvcPBCG7/srBN8hp+T43Qxekt12ycYsiUsLpRRZfrMZLGvMzMjEl/72oqUbauhJo2dmmNGj7y+QmQJ+bJ4wsiwPSMtXIcPuHSEbKpOMzUlo9oYHlFJdsXacrnc2BPvMI1bgPnIY1oSTCcdPwnnSVeYRkhCPfP4XfuI+x+v0/1z7Ruo6gR/UZaV0dsphgDmejDipizTA3SjfSpi7/Hpz53bvU6RAFhfXk/ouwr2yuJmUOopky916YptTKVovcxIOFaVLU8TmGWpCwbZ9L1Dd+5EiQavt/ueh2bXuz/l/CZpdezw0jyX80hy+ffQ+w0ejq7eXRQ3jvY9xK+GNysws0Cp5o/nv9J6iQapfdSiKXR2mfIsxR1/e7+oeXT67esAixU49Xvy5kXMyV3OnHGFwtUA5S4B+7NP4ETr58tULdHPkMJwgyskXSRf2OwAA///OGG3DOAIAAA=="
+        }
+      },
+      {
+        "path": "/etc/docker/daemon.json",
+        "contents": {
+          "compression": "gzip",
+          "source": "data:;base64,H4sIAAAAAAAC/8xSy2rDMBC8+yuEzl50D/jQ7yg9KLbiBFkPtCuXUvLvRbITqiJKQ02Si8Ga0Wh2Zj8bxhjjgzrIOBGEaOlkFN8xHqLFHvADKUjP24W34sh3bLl5OcUe9GyK4wx5ScekJiIGsT9Zkbmr3HeBJPsSxqT8WoCZAOAnSQcXTJeeaWsMq+jdBd0dHRIvCG/Xv3P70/VlwDs4L7PcxL2eDQNIdyAO2Dmv7PN0UGWUXm+t6RHD/r22LQfWs4FB7eP45H1mjzC5sRNkvLiaF7/Q61BKuVc3r8T9UvrnIlSTWjU3T6tZvufmKwAA//9hTB1H4QUAAA=="
+        }
+      }
+    ],
+    "links": [
+      {
+        "path": "/etc/localtime",
+        "target": "../usr/share/zoneinfo/America/New_York"
+      },
+      {
+        "path": "/etc/systemd/system/multi-user.target.wants/unbound.service",
+        "target": "/usr/lib/systemd/system/unbound.service"
+      },
+      {
+        "path": "/etc/systemd/system/multi-user.target.wants/tuned.service",
+        "target": "/usr/lib/systemd/system/tuned.service"
+      },
+      {
+        "path": "/etc/systemd/system/kdump.service.target",
+        "target": "/dev/null"
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf -o /etc/chrony.conf\nExecStart=/usr/bin/systemctl restart chronyd\nExecStart=/usr/bin/rpm-ostree install docker-compose firewalld qemu-guest-agent tuned unbound\nExecStart=/usr/bin/rpm-ostree override remove cifs-utils samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac\nExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf -o /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_security-misc.conf -o /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=1/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all=1/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all=1/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/30_security-misc.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_silent-kernel-printk.conf -o /etc/sysctl.d/30_silent-kernel-printk.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/sysctl.d/30_security-misc_kexec-disable.conf -o /etc/sysctl.d/30_security-misc_kexec-disable.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/NetworkManager.service.d\nExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf -o /etc/systemd/system/NetworkManager.service.d/99-brace.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/irqbalance.service.d\nExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf -o /etc/systemd/system/irqbalance.service.d/99-brace.conf\nExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf -o /etc/systemd/system/sshd.service.d/override.conf\nExecStart=/usr/bin/curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf -o /etc/ssh/sshd_config.d/10-custom.conf\nExecStart=/usr/bin/systemctl disable systemd-resolved\nExecStart=/usr/bin/touch /var/lib/%N.stamp\nExecStart=/usr/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "postinst.service"
+      },
+      {
+        "contents": "[Service]\nType=oneshot\nExecStart=/usr/sbin/setsebool container_use_cephfs off\nExecStart=/usr/sbin/setsebool virt_use_nfs off\nExecStart=/usr/sbin/setsebool virt_use_samba off\nRemainAfterExit=yes\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "setsebool.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=gVisor Update\nRequires=network-online.target\nBefore=docker.service\n\n[Service]\nWorkingDirectory=/var/roothome\nType=oneshot\nExecStart=/usr/bin/sleep 5\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512\nExecStart=/usr/bin/sha512sum -c runsc.sha512 -c containerd-shim-runsc-v1.sha512\nExecStart=/usr/bin/rm -f runsc.sha512 containerd-shim-runsc-v1.sha512\nExecStart=/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1\nExecStart=/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin\nExecStart=/usr/bin/chcon system_u:object_r:container_runtime_exec_t:s0 /var/usrlocal/bin/runsc\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "gvisor-updater.service"
+      },
+      {
+        "enabled": true,
+        "name": "docker.service"
+      },
+      {
+        "enabled": true,
+        "name": "fstrim.timer"
+      },
+      {
+        "enabled": true,
+        "name": "systemd-oomd.service"
+      },
+      {
+        "enabled": false,
+        "mask": true,
+        "name": "rpm-ostree-countme.timer"
+      },
+      {
+        "enabled": false,
+        "name": "sshd.service"
+      },
+      {
+        "enabled": true,
+        "name": "sshd.socket"
+      }
+    ]
+  }
+}

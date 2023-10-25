@@ -120,12 +120,14 @@ storage:
           length_minutes = 60
     - path: /etc/issue
       overwrite: true
-      contents: |
-        Authorized uses only. All activity may be monitored and reported.
+      contents:
+        inline: |
+          Authorized uses only. All activity may be monitored and reported.
     - path: /etc/issue.net
       overwrite: true
-      contents: |
-        Authorized uses only. All activity may be monitored and reported.
+      contents:
+        inline: |
+          Authorized uses only. All activity may be monitored and reported.
     - path: /etc/tuned/active_profile
       overwrite: true
       contents:
