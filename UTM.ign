@@ -156,6 +156,10 @@
       {
         "path": "/etc/systemd/system/kdump.service.target",
         "target": "/dev/null"
+      },
+      {
+        "path": "/etc/systemd/system/debug-shell.service",
+        "target": "/dev/null"
       }
     ]
   },

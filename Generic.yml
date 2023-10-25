@@ -312,6 +312,8 @@ storage:
       target: /usr/lib/systemd/system/tuned.service
     - path: /etc/systemd/system/kdump.service.target
       target: /dev/null
+    - path: /etc/systemd/system/debug-shell.service
+      target: /dev/null
 kernel_arguments:
   should_exist:
     - spectre_v2=on
