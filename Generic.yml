@@ -136,6 +136,14 @@ storage:
           days = [ "Sun" ]
           start_time = "0:00"
           length_minutes = 60
+    - path: /etc/issue
+      overwrite: true
+      contents: |
+        Authorized uses only. All activity may be monitored and reported.
+    - path: /etc/issue.net
+      overwrite: true
+      contents: |
+        Authorized uses only. All activity may be monitored and reported.
     - path: /etc/tuned/active_profile
       overwrite: true
       contents:
