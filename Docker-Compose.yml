@@ -4,7 +4,7 @@ passwd:
   users:
     - name: tomster
       ssh_authorized_keys:
-        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVwG+Pt0LnDJqUJaHrl830mEBvI2N/qfnlfdnSRM7LJ
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkTKkJS7Id1WCyA5Klu/moLG9mP5hTC+v2qYqypMF1u contact@tommytran.io
       groups:
         - wheel
         - sudo
