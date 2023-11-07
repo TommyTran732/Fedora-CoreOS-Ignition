@@ -255,21 +255,21 @@ storage:
               "default-runtime": "runsc-systrap",
               "runtimes": {
                   "runsc-kvm": {
-                      "path": "/usr/bin/runsc",
+                      "path": "/usr/local/bin/runsc",
                       "runtimeArgs": [
                           "--platform=kvm",
                           "--network=host"
                       ]
                   },
                   "runsc-systrap": {
-                      "path": "/usr/bin/runsc",
+                      "path": "/usr/local/bin/runsc",
                       "runtimeArgs": [
                           "--platform=systrap",
                           "--network=host"
                       ]
                   },
                   "runsc-kvm --host-uds=open": {
-                      "path": "/usr/bin/runsc",
+                      "path": "/usr/local/bin/runsc",
                       "runtimeArgs": [
                           "--platform=kvm",
                           "--network=host",
@@ -277,7 +277,7 @@ storage:
                       ]
                   },
                   "runsc-systrap --host-uds=open": {
-                      "path": "/usr/bin/runsc",
+                      "path": "/usr/local/bin/runsc",
                       "runtimeArgs": [
                           "--platform=systrap",
                           "--network=host",
@@ -285,7 +285,7 @@ storage:
                       ]
                   },
                   "runsc-kvm-debug": {
-                      "path": "/usr/bin/runsc",
+                      "path": "/usr/local/bin/runsc",
                       "runtimeArgs": [
                           "--platform=kvm",
                           "--network=host",
@@ -295,7 +295,7 @@ storage:
                       ]
                   },
                   "runsc-systrap-debug": {
-                      "path": "/usr/bin/runsc",
+                      "path": "/usr/local/bin/runsc",
                       "runtimeArgs": [
                           "--platform=systrap",
                           "--network=host",
