@@ -335,6 +335,7 @@ kernel_arguments:
     - random.trust_cpu=off
     - intel_iommu=on
     - amd_iommu=force_isolation
+    - efi=disable_early_pci_dma
     - iommu=force
     - iommu.passthrough=0
     - iommu.strict=1
