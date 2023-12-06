@@ -228,8 +228,10 @@ kernel_arguments:
     - random.trust_bootloader=off
     - random.trust_cpu=off
     - intel_iommu=on
-    - amd_iommu=on
-    - iommu.passthrough=0 iommu.strict=1
+    - amd_iommu=force_isolation
+    - iommu=force
+    - iommu.passthrough=0
+    - iommu.strict=1
     - slab_nomerge
     - init_on_alloc=1
     - init_on_free=1
