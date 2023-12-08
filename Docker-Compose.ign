@@ -174,7 +174,7 @@
         "target": "/usr/lib/systemd/system/tuned.service"
       },
       {
-        "path": "/etc/systemd/system/kdump.service.target",
+        "path": "/etc/systemd/system/kdump.service",
         "target": "/dev/null"
       },
       {

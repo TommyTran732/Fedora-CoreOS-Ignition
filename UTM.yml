@@ -221,7 +221,7 @@ storage:
       target: /usr/lib/systemd/system/unbound.service
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service
       target: /usr/lib/systemd/system/tuned.service
-    - path: /etc/systemd/system/kdump.service.target
+    - path: /etc/systemd/system/kdump.service
       target: /dev/null
     - path: /etc/systemd/system/debug-shell.service
       target: /dev/null
