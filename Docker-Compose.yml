@@ -44,8 +44,8 @@ systemd:
         RemainAfterExit=yes
         ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf | /usr/bin/tee /etc/chrony.conf
         ExecStart=/usr/bin/systemctl restart chronyd
-        ExecStart=/usr/bin/rpm-ostree install auditd docker-compose firewalld qemu-guest-agent tuned unbound
-        ExecStart=/usr/bin/rpm-ostree override remove cifs-utils samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac
+        ExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd moby-engine runc samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac
+        ExecStart=/usr/bin/rpm-ostree install auditd docker-ce docker-compose-plugin firewalld qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf | /usr/bin/tee /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/990-security-misc.conf | /usr/bin/tee /etc/sysctl.d/990-security-misc.conf
@@ -135,6 +135,71 @@ storage:
           days = [ "Sun" ]
           start_time = "0:00"
           length_minutes = 60
+    - path: /etc/yum.repos.d/docker-ce.repo
+      contents:
+        inline: |
+          [docker-ce-stable]
+          name=Docker CE Stable - $basearch
+          baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-stable-debuginfo]
+          name=Docker CE Stable - Debuginfo $basearch
+          baseurl=https://download.docker.com/linux/fedora/$releasever/debug-$basearch/stable
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-stable-source]
+          name=Docker CE Stable - Sources
+          baseurl=https://download.docker.com/linux/fedora/$releasever/source/stable
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-test]
+          name=Docker CE Test - $basearch
+          baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/test
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-test-debuginfo]
+          name=Docker CE Test - Debuginfo $basearch
+          baseurl=https://download.docker.com/linux/fedora/$releasever/debug-$basearch/test
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-test-source]
+          name=Docker CE Test - Sources
+          baseurl=https://download.docker.com/linux/fedora/$releasever/source/test
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-nightly]
+          name=Docker CE Nightly - $basearch
+          baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/nightly
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-nightly-debuginfo]
+          name=Docker CE Nightly - Debuginfo $basearch
+          baseurl=https://download.docker.com/linux/fedora/$releasever/debug-$basearch/nightly
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-nightly-source]
+          name=Docker CE Nightly - Sources
+          baseurl=https://download.docker.com/linux/fedora/$releasever/source/nightly
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
     - path: /etc/issue
       overwrite: true
       contents:
@@ -188,8 +253,8 @@ storage:
           Group=root
           WorkingDirectory=/path/to/docker-compose/directory
           #ExecStart=/usr/bin/git pull
-          ExecStart=/usr/bin/docker-compose pull
-          ExecStart=/usr/bin/docker-compose up -d
+          ExecStart=/usr/bin/docker compose pull
+          ExecStart=/usr/bin/docker compose up -d
           Type=oneshot
 
           [Install]
