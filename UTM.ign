@@ -181,6 +181,11 @@
         "name": "postinst.service"
       },
       {
+        "contents": "[Unit]\nDescription=Initial System Setup Part 2\n# We run this after the packages have been overlayed\nAfter=network-online.target\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/firewall-cmd --lockdown-on\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "postinst2.service"
+      },
+      {
         "contents": "[Service]\nType=oneshot\nExecStart=/usr/sbin/setsebool container_use_cephfs off\nExecStart=/usr/sbin/setsebool virt_use_nfs off\nExecStart=/usr/sbin/setsebool virt_use_samba off\nRemainAfterExit=yes\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "setsebool.service"

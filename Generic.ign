@@ -195,7 +195,7 @@
         "name": "postinst.service"
       },
       {
-        "contents": "[Unit]\nDescription=Initial System Setup Part 2\n# We run this after the packages have been overlayed\nAfter=network-online.target\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped --runtime=runc -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule \"0 15 0 * * 0\"\nExecStart=/bin/touch /var/lib/%N.stamp\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Initial System Setup Part 2\n# We run this after the packages have been overlayed\nAfter=network-online.target\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/firewall-cmd --lockdown-on\nExecStart=/usr/bin/docker run --detach --privileged --name watchtower --restart unless-stopped --runtime=runc -v /var/run/docker.sock:/var/run/docker.sock -v /etc/localtime:/etc/localtime:ro containrrr/watchtower --schedule \"0 15 0 * * 0\"\nExecStart=/bin/touch /var/lib/%N.stamp\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "postinst2.service"
       },

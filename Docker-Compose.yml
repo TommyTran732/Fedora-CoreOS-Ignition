@@ -68,6 +68,23 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
+    - name: postinst2.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Initial System Setup Part 2
+        # We run this after the packages have been overlayed
+        After=network-online.target
+        ConditionPathExists=!/var/lib/%N.stamp
+        ConditionPathExists=/var/lib/postinst.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/firewall-cmd --lockdown-on
+
+        [Install]
+        WantedBy=multi-user.target
     - name: setsebool.service
       enabled: true
       contents: |
