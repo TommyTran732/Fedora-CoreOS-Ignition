@@ -217,16 +217,6 @@ storage:
           enabled=0
           gpgcheck=1
           gpgkey=https://download.docker.com/linux/fedora/gpg
-    - path: /etc/issue
-      overwrite: true
-      contents:
-        inline: |
-          Authorized uses only. All activity may be monitored and reported.
-    - path: /etc/issue.net
-      overwrite: true
-      contents:
-        inline: |
-          Authorized uses only. All activity may be monitored and reported.
     - path: /etc/tuned/active_profile
       overwrite: true
       contents:

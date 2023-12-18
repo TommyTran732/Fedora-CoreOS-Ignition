@@ -68,22 +68,6 @@
       },
       {
         "overwrite": true,
-        "path": "/etc/issue",
-        "contents": {
-          "compression": "",
-          "source": "data:,Authorized%20uses%20only.%20All%20activity%20may%20be%20monitored%20and%20reported.%0A"
-        }
-      },
-      {
-        "overwrite": true,
-        "path": "/etc/issue.net",
-        "contents": {
-          "compression": "",
-          "source": "data:,Authorized%20uses%20only.%20All%20activity%20may%20be%20monitored%20and%20reported.%0A"
-        }
-      },
-      {
-        "overwrite": true,
         "path": "/etc/tuned/active_profile",
         "contents": {
           "compression": "",
