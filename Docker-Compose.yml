@@ -61,7 +61,6 @@ systemd:
         ExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d
         ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf | /usr/bin/tee /etc/systemd/system/sshd.service.d/override.conf
         ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf | /usr/bin/tee /etc/ssh/sshd_config.d/10-custom.conf
-        ExecStart=/usr/bin/echo 'CtrlAltDelBurstAction=none' >> /etc/systemd/system.conf
         ExecStart=/usr/bin/systemctl disable systemd-resolved
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
@@ -405,8 +404,6 @@ storage:
       target: /dev/null
     - path: /etc/systemd/system/debug-shell.service
       target: /dev/null
-    - path: /etc/systemd/system/ctrl-alt-del.target
-      target: /dev/null
 kernel_arguments:
   should_exist:
     - spectre_v2=on
@@ -432,6 +429,7 @@ kernel_arguments:
     - init_on_free=1
     - pti=on
     - vsyscall=none
+    - ia32_emulation=0
     - page_alloc.shuffle=1
     - randomize_kstack_offset=on
     - extra_latent_entropy
