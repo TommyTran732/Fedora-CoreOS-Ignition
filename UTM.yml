@@ -87,7 +87,7 @@ systemd:
         ExecStart=/usr/bin/rpm-ostree install firewalld qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd moby-engine runc samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac
         ExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth
-        ExecStart=/usr/bin/echo 'allow 10.0.2.2/32' >> /etc/chrony.conf
+        ExecStart=/usr/bin/sed -i '$ a\allow 10.0.2.2/32' /etc/chrony.conf
         ExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/sed -i 's/# install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=1/g' /etc/sysctl.d/990-security-misc.conf
