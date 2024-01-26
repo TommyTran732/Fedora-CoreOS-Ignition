@@ -232,7 +232,7 @@ storage:
             forward-addr: 1.1.1.2@853#security.cloudflare-dns.com
             forward-addr: 1.0.0.2@853#security.cloudflare-dns.com
             forward-addr: 2606:4700:4700::1112@853#security.cloudflare-dns.com
-            forward-addr: 2606:4700:4700::1002@853#security.cloudflare-dns.comff
+            forward-addr: 2606:4700:4700::1002@853#security.cloudflare-dns.com
     - path: /etc/systemd/system/unbound.service.d/override.conf
       contents:
         inline: |
