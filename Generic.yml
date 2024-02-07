@@ -43,7 +43,7 @@ systemd:
         Type=oneshot
         RemainAfterExit=yes
         ExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd moby-engine runc samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac
-        ExecStart=/usr/bin/rpm-ostree install docker-ce firewalld qemu-guest-agent tuned unbound
+        ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/sed -i 's/# install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf
@@ -85,7 +85,7 @@ systemd:
         RemainAfterExit=yes
         [Install]
         WantedBy=multi-user.target
-    - name: gvisor-download.service
+    - name: gvisor-downloader.service
       enabled: true
       contents: |
         [Unit]
@@ -110,7 +110,7 @@ systemd:
       contents: |
         [Unit]
         Description=Copy gVisor to the correct location
-        After=gvisor-download.service
+        After=gvisor-downloader.service
 
         [Service]
         WorkingDirectory=/var/home/unpriv
@@ -121,6 +121,23 @@ systemd:
         ExecStart=/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1
         ExecStart=/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin
         ExecStart=/usr/bin/chcon system_u:object_r:container_runtime_exec_t:s0 /var/usrlocal/bin/runsc
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: docker-compose-updater.service
+      enabled: false
+      contents: |
+        [Unit]
+        Description=Update containers with Docker-Compose
+        Requires=network-online.target
+        After=docker.service
+
+        [Service]
+        WorkingDirectory=/path/to/directory
+        Type=oneshot
+        #ExecStart=/usr/bin/git pull
+        ExecStart=/usr/bin/docker compose pull
+        ExecStart=/usr/bin/docker compose up -d
 
         [Install]
         WantedBy=multi-user.target
