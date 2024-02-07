@@ -25,7 +25,7 @@ passwd:
     - name: unpriv
 systemd:
   units:
-    - name: postinst.service
+    - name: postinst1.service
       enabled: true
       contents: |
         [Unit]
@@ -36,54 +36,12 @@ systemd:
         After=network-online.target
         # We run before `zincati.service` to avoid conflicting rpm-ostree
         # transactions.
-        ConditionPathExists=!/var/home/unpriv/%N.stamp
-
-        [Service]
-        Type=oneshot
-        RemainAfterExit=yes
-        User=unpriv
-        WorkingDirectory=/var/home/unpriv
-        ExecStart=/usr/bin/sleep 5
-        ExecStart=/usr/bin/curl -O https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf
-        ExecStart=/usr/bin/curl -O https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf
-        ExecStart=/usr/bin/curl -O https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/990-security-misc.conf
-        ExecStart=/usr/bin/curl -O https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_silent-kernel-printk.conf
-        ExecStart=/usr/bin/curl -O https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_security-misc_kexec-disable.conf
-        ExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf -o /var/home/unpriv/NetworkManager-brace.conf
-        ExecStart=/usr/bin/curl https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf -o /var/home/unpriv/irqbalance-brace.conf
-        ExecStart=/usr/bin/curl -O https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf
-        ExecStart=/usr/bin/curl -O https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf
-        ExecStart=/usr/bin/touch /var/home/unpriv/%N.stamp
-
-        [Install]
-        WantedBy=multi-user.target
-    - name: postinst2.service
-      enabled: true
-      contents: |
-        [Unit]
-        Description=Initial System Setup Part 2
-        # We run this after files have been downloaded
-        After=postinst.service
         Before=zincati.service
         ConditionPathExists=!/var/lib/%N.stamp
-        ConditionPathExists=/var/home/unpriv/postinst.stamp
 
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/cp /var/home/unpriv/chrony.conf /etc/chrony.conf
-        ExecStart=/usr/bin/cp /var/home/unpriv/30_security-misc.conf /etc/modprobe.d/30_security-misc.conf
-        ExecStart=/usr/bin/cp /var/home/unpriv/990-security-misc.conf /etc/sysctl.d/990-security-misc.conf
-        ExecStart=/usr/bin/cp /var/home/unpriv/30_silent-kernel-printk.conf /etc/sysctl.d/30_silent-kernel-printk.conf
-        ExecStart=/usr/bin/cp /var/home/unpriv/30_security-misc_kexec-disable.conf /etc/sysctl.d/30_security-misc_kexec-disable.conf
-        ExecStart=/usr/bin/mkdir -p /etc/systemd/system/sshd.service.d
-        ExecStart=/usr/bin/cp /var/home/unpriv/local.conf /etc/systemd/system/sshd.service.d/override.conf
-        ExecStart=/usr/bin/cp /var/home/unpriv/10-custom.conf /etc/ssh/sshd_config.d/10-custom.conf
-        ExecStart=/usr/bin/mkdir -p /etc/systemd/system/NetworkManager.service.d
-        ExecStart=/usr/bin/cp /var/home/unpriv/NetworkManager-brace.conf /etc/systemd/system/NetworkManager.service.d/99-brace.conf
-        ExecStart=/usr/bin/mkdir -p /etc/systemd/system/irqbalance.service.d
-        ExecStart=/usr/bin/cp /var/home/unpriv/irqbalance-brace.conf /etc/systemd/system/irqbalance.service.d/99-brace.conf
-        ExecStart=/usr/bin/systemctl restart chronyd
         ExecStart=/usr/bin/rpm-ostree install firewalld qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd moby-engine runc samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac
         ExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth
@@ -99,7 +57,7 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
-    - name: postinst3.service
+    - name: postinst2.service
       enabled: true
       contents: |
         [Unit]
@@ -107,7 +65,7 @@ systemd:
         # We run this after the packages have been overlayed
         After=firewalld.service
         ConditionPathExists=!/var/lib/%N.stamp
-        ConditionPathExists=/var/lib/postinst2.stamp
+        ConditionPathExists=/var/lib/postinst.stamp
 
         [Service]
         Type=oneshot
@@ -155,18 +113,43 @@ storage:
         inline: |
           [updates]
           strategy = "immediate"
-    - path: /etc/tuned/active_profile
+    - path: /etc/chrony.conf
+      contents:
+        source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf
       overwrite: true
+    - path: /etc/modprobe.d/30_security-misc.conf
+      contents:
+        source: https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf
+    - path: /etc/sysctl.d/990-security-misc.conf
+      contents:
+        source: https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/990-security-misc.conf
+    - path: /etc/sysctl.d/30_silent-kernel-printk.conf
+      contents:
+        source: https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_silent-kernel-printk.conf
+    - path: /etc/sysctl.d/30_security-misc_kexec-disable.conf
+      contents:
+        source: https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_security-misc_kexec-disable.conf
+    - path: /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+      contents:
+        source: https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf
+    - path: /etc/systemd/system/irqbalance.service.d/99-brace.conf
+      contents:
+        source: https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
+    - path: /etc/systemd/system/sshd.service.d/local.conf
+      contents:
+        source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf
+    - path: /etc/ssh/sshd_config/10-custom.conf
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf
+    - path: /etc/tuned/active_profile
       contents:
         inline: |
           virtual-guest
     - path: /etc/tuned/profile_mode
-      overwrite: true
       contents:
         inline: |
           manual
     - path: /etc/systemd/zram-generator.conf
-      overwrite: true
       contents:
         inline: |
           [zram0]
@@ -174,12 +157,10 @@ storage:
           max-zram-size = 8192
           compression-algorithm = zstd
     - path: /etc/security/limits.d/30-disable-coredump.conf
-      overwrite: true
       contents:
         inline: |
           * hard core 0
     - path: /etc/ssh/ssh_config.d/10-custom.conf
-      overwrite: true
       contents:
         inline: |
           GSSAPIAuthentication no
@@ -191,7 +172,6 @@ storage:
           # Command-line options for chronyd
           OPTIONS="-F 1"
     - path: /etc/unbound/unbound.conf
-      overwrite: true
       contents:
         inline: |
           server:
@@ -256,7 +236,7 @@ storage:
           LockPersonality=yes
   links:
     - path: /etc/localtime
-      target: ../usr/share/zoneinfo/America/New_York
+      target: ../usr/share/zoneinfo/America/Phoenix
     - path: /etc/systemd/system/multi-user.target.wants/unbound.service
       target: /usr/lib/systemd/system/unbound.service
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service
@@ -267,16 +247,14 @@ storage:
       target: /dev/null
 kernel_arguments:
   should_exist:
+    - mitigations=auto,nosmt
     - spectre_v2=on
     - spec_store_bypass_disable=on
-    - l1tf=full,force
-    - mds=full,nosmt
     - tsx=off
-    - tsx_async_abort=full,nosmt
     - kvm.nx_huge_pages=force
     - nosmt=force
     - l1d_flush=on
-    - mmio_stale_data=full,nosmt
+    - spec_rstack_overflow=safe-ret
     - random.trust_bootloader=off
     - random.trust_cpu=off
     - intel_iommu=on
