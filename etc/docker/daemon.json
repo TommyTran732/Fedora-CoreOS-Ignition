@@ -1,0 +1,55 @@
+{
+    "default-runtime": "runsc-systrap",
+    "runtimes": {
+        "runsc-kvm": {
+            "path": "/usr/local/bin/runsc",
+            "runtimeArgs": [
+                "--platform=kvm",
+                "--network=host"
+            ]
+        },
+        "runsc-systrap": {
+            "path": "/usr/local/bin/runsc",
+            "runtimeArgs": [
+                "--platform=systrap",
+                "--network=host"
+            ]
+        },
+        "runsc-kvm --host-uds=open": {
+            "path": "/usr/local/bin/runsc",
+            "runtimeArgs": [
+                "--platform=kvm",
+                "--network=host",
+                "--host-uds=open"
+            ]
+        },
+        "runsc-systrap --host-uds=open": {
+            "path": "/usr/local/bin/runsc",
+            "runtimeArgs": [
+                "--platform=systrap",
+                "--network=host",
+                "--host-uds=open"
+            ]
+        },
+        "runsc-kvm-debug": {
+            "path": "/usr/local/bin/runsc",
+            "runtimeArgs": [
+                "--platform=kvm",
+                "--network=host",
+                "--debug-log=/tmp/runsc-kvm/",
+                "--debug",
+                "--strace"
+            ]
+        },
+        "runsc-systrap-debug": {
+            "path": "/usr/local/bin/runsc",
+            "runtimeArgs": [
+                "--platform=systrap",
+                "--network=host",
+                "--debug-log=/tmp/runsc-systrap/",
+                "--debug",
+                "--strace"
+            ]
+        }
+    }
+}

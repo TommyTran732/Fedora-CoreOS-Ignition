@@ -43,9 +43,6 @@
         "sshAuthorizedKeys": [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkTKkJS7Id1WCyA5Klu/moLG9mP5hTC+v2qYqypMF1u contact@tommytran.io"
         ]
-      },
-      {
-        "name": "unpriv"
       }
     ]
   },
@@ -109,72 +106,64 @@
         }
       },
       {
+        "path": "/etc/ssh/sshd_config.d/10-custom.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf"
+        }
+      },
+      {
+        "path": "/etc/ssh/ssh_config.d/10-custom.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf"
+        }
+      },
+      {
         "path": "/etc/systemd/system/sshd.service.d/local.conf",
         "contents": {
           "source": "https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf"
         }
       },
       {
-        "path": "/etc/ssh/sshd_config/10-custom.conf",
-        "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf"
-        }
-      },
-      {
         "path": "/etc/tuned/active_profile",
         "contents": {
-          "compression": "",
-          "source": "data:,virtual-guest%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/active_profile"
         }
       },
       {
         "path": "/etc/tuned/profile_mode",
         "contents": {
-          "compression": "",
-          "source": "data:,manual%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/profile_mode"
         }
       },
       {
         "path": "/etc/systemd/zram-generator.conf",
         "contents": {
-          "compression": "",
-          "source": "data:,%5Bzram0%5D%0Azram-fraction%20%3D%201%0Amax-zram-size%20%3D%208192%0Acompression-algorithm%20%3D%20zstd%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/zram-generator.conf"
         }
       },
       {
         "path": "/etc/security/limits.d/30-disable-coredump.conf",
         "contents": {
-          "compression": "",
-          "source": "data:,*%20hard%20core%200%0A"
-        }
-      },
-      {
-        "path": "/etc/ssh/ssh_config.d/10-custom.conf",
-        "contents": {
-          "compression": "",
-          "source": "data:,GSSAPIAuthentication%20no%0AVerifyHostKeyDNS%20yes%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/security/limits.d/30-disable-coredump.conf"
         }
       },
       {
         "overwrite": true,
         "path": "/etc/sysconfig/chronyd",
         "contents": {
-          "compression": "",
-          "source": "data:,%23%20Command-line%20options%20for%20chronyd%0AOPTIONS%3D%22-F%201%22%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd"
         }
       },
       {
         "path": "/etc/unbound/unbound.conf",
         "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/6xSQWvcPBC9768Q/s5jezfZ5MNQ6CWFQktL00uPE2lsD5ElZzTa1Pn1RbtdlyyFQqkNxp4373ne0ySSA0m3McaOEqN2pqo2G2MwawSVnBQw2DEK9OypM1VzQGk8PzQ5PMQcXFNY9SMt1caYV4TEQ0DPYejMQmljTOmER1ogUVAO5E9A4fkElkThIQdXftOQ2iYl35RqaiweYe7ZolKqreiZxfNIkjpTff7y6d37D3dv7r/df737eDQxsiMYVWfIiQRwoKDnYY4YuzKJLq+KRxMnD6/qB5LEMaxDOwoLYPhFRnEUAP0QwcXnMAg6ugA9ykDwlEmY0gUm1JMIephRxwssjfGYTp/4ZdXkIUQhsA56j2vKE36H7GY4dV61t7tSjC57AhtDz0NnqgN6dqhRDCtJeSnH9xRwIpg48MQJlWOApMJ2DS2HZwxKDoRmv4COQmmM3nVm256u0pQILM4J+ijAbs0rZh0ihwHm4mUmmVgLcXcNN/v91b70zCUEtav983dZm59CfZRnFAcvMVDZ2zJzZ6q6GDhjZTPynFQIp7PUGUPnpDPbuty7t//vr/5LZLOwLrX1MbveoxC4kGobp9/w2rr9C97upr3prm/b9vTottvtPxBp2z+L/AgAAP//qRxiA+IDAAA="
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/unbound/unbound.conf"
         }
       },
       {
         "path": "/etc/systemd/system/unbound.service.d/override.conf",
         "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/2yRQWvcPBCG7/srBN8hp+T43Qxekt12ycYsiUsLpRRZfrMZLGvMzMjEl/72oqUbauhJo2dmmNGj7y+QmQJ+bJ4wsiwPSMtXIcPuHSEbKpOMzUlo9oYHlFJdsXacrnc2BPvMI1bgPnIY1oSTCcdPwnnSVeYRkhCPfP4XfuI+x+v0/1z7Ruo6gR/UZaV0dsphgDmejDipizTA3SjfSpi7/Hpz53bvU6RAFhfXk/ouwr2yuJmUOopky916YptTKVovcxIOFaVLU8TmGWpCwbZ9L1Dd+5EiQavt/ueh2bXuz/l/CZpdezw0jyX80hy+ffQ+w0ejq7eXRQ3jvY9xK+GNysws0Cp5o/nv9J6iQapfdSiKXR2mfIsxR1/e7+oeXT67esAixU49Xvy5kXMyV3OnHGFwtUA5S4B+7NP4ETr58tULdHPkMJwgyskXSRf2OwAA///OGG3DOAIAAA=="
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.servcice.d/override.conf"
         }
       }
     ],
@@ -204,9 +193,9 @@
   "systemd": {
     "units": [
       {
-        "contents": "[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/systemctl restart chronyd\nExecStart=/usr/bin/rpm-ostree install firewalld qemu-guest-agent tuned unbound\nExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd moby-engine runc samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac\nExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth\nExecStart=/usr/bin/sed -i '$ a\\allow 10.0.2.2/32' /etc/chrony.conf\nExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/# install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=1/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all=1/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all=1/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/systemctl disable systemd-resolved\nExecStart=/usr/bin/touch /var/lib/%N.stamp\nExecStart=/usr/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/rpm-ostree install firewalld qemu-guest-agent tuned unbound\nExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd moby-engine runc samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac\nExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth\nExecStart=/usr/bin/sed -i '$ a\\allow 10.0.2.2/32' /etc/chrony.conf\nExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/# install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=1/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all=1/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all=1/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/systemctl disable systemd-resolved\nExecStart=/usr/bin/touch /var/lib/%N.stamp\nExecStart=/usr/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
-        "name": "postinst1.service"
+        "name": "postinst.service"
       },
       {
         "contents": "[Unit]\nDescription=Initial System Setup Part 3\n# We run this after the packages have been overlayed\nAfter=firewalld.service\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/systemctl enable --now firewalld\nExecStart=/usr/bin/firewall-cmd --lockdown-on\nExecStart=/usr/bin/firewall-cmd --permanent --add-service=ntp\nExecStart=/usr/bin/firewall-cmd --reload\n\n[Install]\nWantedBy=multi-user.target\n",

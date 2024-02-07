@@ -22,10 +22,9 @@ passwd:
       groups:
         - wheel
         - sudo
-    - name: unpriv
 systemd:
   units:
-    - name: postinst1.service
+    - name: postinst.service
       enabled: true
       contents: |
         [Unit]
@@ -135,105 +134,37 @@ storage:
     - path: /etc/systemd/system/irqbalance.service.d/99-brace.conf
       contents:
         source: https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
+    - path: /etc/ssh/sshd_config.d/10-custom.conf
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf
+    - path: /etc/ssh/ssh_config.d/10-custom.conf
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf
     - path: /etc/systemd/system/sshd.service.d/local.conf
       contents:
         source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf
-    - path: /etc/ssh/sshd_config/10-custom.conf
-      contents:
-        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf
     - path: /etc/tuned/active_profile
       contents:
-        inline: |
-          virtual-guest
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/active_profile
     - path: /etc/tuned/profile_mode
       contents:
-        inline: |
-          manual
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/profile_mode
     - path: /etc/systemd/zram-generator.conf
       contents:
-        inline: |
-          [zram0]
-          zram-fraction = 1
-          max-zram-size = 8192
-          compression-algorithm = zstd
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/zram-generator.conf
     - path: /etc/security/limits.d/30-disable-coredump.conf
       contents:
-        inline: |
-          * hard core 0
-    - path: /etc/ssh/ssh_config.d/10-custom.conf
-      contents:
-        inline: |
-          GSSAPIAuthentication no
-          VerifyHostKeyDNS yes
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/security/limits.d/30-disable-coredump.conf
     - path: /etc/sysconfig/chronyd
       overwrite: true
       contents:
-        inline: |
-          # Command-line options for chronyd
-          OPTIONS="-F 1"
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd
     - path: /etc/unbound/unbound.conf
       contents:
-        inline: |
-          server:
-            chroot: ""
-
-            auto-trust-anchor-file: "/var/lib/unbound/root.key"
-            trust-anchor-signaling: yes
-            root-key-sentinel: yes
-
-            tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
-            tls-ciphers: "PROFILE=SYSTEM"
-
-            hide-http-user-agent: yes
-            hide-identity: yes
-            hide-trustanchor: yes
-            hide-version: yes
-
-            deny-any: yes
-            harden-algo-downgrade: yes
-            harden-large-queries: yes
-            harden-referral-path: yes
-            harden-short-bufsize: yes
-            ignore-cd-flag: yes
-            max-udp-size: 3072
-            module-config: "validator iterator"
-            qname-minimisation-strict: yes
-            unwanted-reply-threshold: 10000000
-            use-caps-for-id: yes
-
-            outgoing-port-permit: 1024-65535
-
-            prefetch: yes
-            prefetch-key: yes
-
-          forward-zone:
-            name: "."
-            forward-tls-upstream: yes
-            forward-addr: 1.1.1.2@853#security.cloudflare-dns.com
-            forward-addr: 1.0.0.2@853#security.cloudflare-dns.com
-            forward-addr: 2606:4700:4700::1112@853#security.cloudflare-dns.com
-            forward-addr: 2606:4700:4700::1002@853#security.cloudflare-dns.com
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/unbound/unbound.conf
     - path: /etc/systemd/system/unbound.service.d/override.conf
       contents:
-        inline: |
-          [Service]
-          MemoryDenyWriteExecute=true
-          PrivateDevices=true
-          PrivateTmp=true
-          ProtectHome=true
-          ProtectClock=true
-          ProtectControlGroups=true
-          ProtectKernelLogs=true
-          ProtectKernelModules=true
-          # This breaks using socket options like 'so-rcvbuf'. Explicitly disable for visibility.
-          ProtectKernelTunables=true
-          ProtectProc=invisible
-          RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
-          RestrictRealtime=true
-          SystemCallArchitectures=native
-          SystemCallFilter=~@clock @cpu-emulation @debug @keyring @module mount @obsolete @resources
-          RestrictNamespaces=yes
-          LockPersonality=yes
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.servcice.d/override.conf
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/Phoenix

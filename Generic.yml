@@ -127,85 +127,16 @@ storage:
   files:
     - path: /etc/zincati/config.d/51-rollout-wariness.toml
       contents:
-        inline: |
-          [identity]
-          rollout_wariness = 0
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/zincati/config.d/51-rollout-wariness.toml
     - path: /etc/zincati/config.d/55-updates-strategy.toml
       contents:
-        inline: |
-          [updates]
-          strategy = "periodic"
-          [updates.periodic]
-          time_zone = "localtime"
-          [[updates.periodic.window]]
-          days = [ "Sun" ]
-          start_time = "0:00"
-          length_minutes = 60
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/zincati/config.d/55-updates-strategy.toml
     - path: /etc/yum.repos.d/docker-ce.repo
       contents:
-        inline: |
-          [docker-ce-stable]
-          name=Docker CE Stable - $basearch
-          baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/stable
-          enabled=1
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
-
-          [docker-ce-stable-debuginfo]
-          name=Docker CE Stable - Debuginfo $basearch
-          baseurl=https://download.docker.com/linux/fedora/$releasever/debug-$basearch/stable
-          enabled=0
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
-
-          [docker-ce-stable-source]
-          name=Docker CE Stable - Sources
-          baseurl=https://download.docker.com/linux/fedora/$releasever/source/stable
-          enabled=0
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
-
-          [docker-ce-test]
-          name=Docker CE Test - $basearch
-          baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/test
-          enabled=0
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
-
-          [docker-ce-test-debuginfo]
-          name=Docker CE Test - Debuginfo $basearch
-          baseurl=https://download.docker.com/linux/fedora/$releasever/debug-$basearch/test
-          enabled=0
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
-
-          [docker-ce-test-source]
-          name=Docker CE Test - Sources
-          baseurl=https://download.docker.com/linux/fedora/$releasever/source/test
-          enabled=0
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
-
-          [docker-ce-nightly]
-          name=Docker CE Nightly - $basearch
-          baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/nightly
-          enabled=0
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
-
-          [docker-ce-nightly-debuginfo]
-          name=Docker CE Nightly - Debuginfo $basearch
-          baseurl=https://download.docker.com/linux/fedora/$releasever/debug-$basearch/nightly
-          enabled=0
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
-
-          [docker-ce-nightly-source]
-          name=Docker CE Nightly - Sources
-          baseurl=https://download.docker.com/linux/fedora/$releasever/source/nightly
-          enabled=0
-          gpgcheck=1
-          gpgkey=https://download.docker.com/linux/fedora/gpg
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/docker-ce.repo
+    - path: /etc/docker/daemon.json
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/docker/daemon.json
     - path: /etc/chrony.conf
       contents:
         source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf
@@ -228,163 +159,37 @@ storage:
     - path: /etc/systemd/system/irqbalance.service.d/99-brace.conf
       contents:
         source: https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf
+    - path: /etc/ssh/sshd_config.d/10-custom.conf
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf
     - path: /etc/systemd/system/sshd.service.d/local.conf
       contents:
         source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf
-    - path: /etc/ssh/sshd_config/10-custom.conf
-      contents:
-        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf
-    - path: /etc/tuned/active_profile
-      contents:
-        inline: |
-          virtual-guest
-    - path: /etc/tuned/profile_mode
-      contents:
-        inline: |
-          manual
-    - path: /etc/systemd/zram-generator.conf
-      contents:
-        inline: |
-          [zram0]
-          zram-fraction = 1
-          max-zram-size = 8192
-          compression-algorithm = zstd
-    - path: /etc/security/limits.d/30-disable-coredump.conf
-      contents:
-        inline: |
-          * hard core 0
     - path: /etc/ssh/ssh_config.d/10-custom.conf
       contents:
-        inline: |
-          GSSAPIAuthentication no
-          VerifyHostKeyDNS yes
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf
+    - path: /etc/tuned/active_profile
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/active_profile
+    - path: /etc/tuned/profile_mode
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/profile_mode
+    - path: /etc/systemd/zram-generator.conf
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/zram-generator.conf
+    - path: /etc/security/limits.d/30-disable-coredump.conf
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/security/limits.d/30-disable-coredump.conf
     - path: /etc/sysconfig/chronyd
       overwrite: true
       contents:
-        inline: |
-          # Command-line options for chronyd
-          OPTIONS="-F 1"
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd
     - path: /etc/unbound/unbound.conf
       contents:
-        inline: |
-          server:
-            chroot: ""
-
-            auto-trust-anchor-file: "/var/lib/unbound/root.key"
-            trust-anchor-signaling: yes
-            root-key-sentinel: yes
-
-            tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
-            tls-ciphers: "PROFILE=SYSTEM"
-
-            hide-http-user-agent: yes
-            hide-identity: yes
-            hide-trustanchor: yes
-            hide-version: yes
-
-            deny-any: yes
-            harden-algo-downgrade: yes
-            harden-large-queries: yes
-            harden-referral-path: yes
-            harden-short-bufsize: yes
-            ignore-cd-flag: yes
-            max-udp-size: 3072
-            module-config: "validator iterator"
-            qname-minimisation-strict: yes
-            unwanted-reply-threshold: 10000000
-            use-caps-for-id: yes
-
-            outgoing-port-permit: 1024-65535
-
-            prefetch: yes
-            prefetch-key: yes
-
-          forward-zone:
-            name: "."
-            forward-tls-upstream: yes
-            forward-addr: 1.1.1.2@853#security.cloudflare-dns.com
-            forward-addr: 1.0.0.2@853#security.cloudflare-dns.com
-            forward-addr: 2606:4700:4700::1112@853#security.cloudflare-dns.com
-            forward-addr: 2606:4700:4700::1002@853#security.cloudflare-dns.com
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/unbound/unbound.conf
     - path: /etc/systemd/system/unbound.service.d/override.conf
       contents:
-        inline: |
-          [Service]
-          MemoryDenyWriteExecute=true
-          PrivateDevices=true
-          PrivateTmp=true
-          ProtectHome=true
-          ProtectClock=true
-          ProtectControlGroups=true
-          ProtectKernelLogs=true
-          ProtectKernelModules=true
-          # This breaks using socket options like 'so-rcvbuf'. Explicitly disable for visibility.
-          ProtectKernelTunables=true
-          ProtectProc=invisible
-          RestrictAddressFamilies=AF_INET AF_INET6 AF_NETLINK AF_UNIX
-          RestrictRealtime=true
-          SystemCallArchitectures=native
-          SystemCallFilter=~@clock @cpu-emulation @debug @keyring @module mount @obsolete @resources
-          RestrictNamespaces=yes
-          LockPersonality=yes
-    - path: /etc/docker/daemon.json
-      contents:
-        inline: |
-          {
-              "default-runtime": "runsc-systrap",
-              "runtimes": {
-                  "runsc-kvm": {
-                      "path": "/usr/local/bin/runsc",
-                      "runtimeArgs": [
-                          "--platform=kvm",
-                          "--network=host"
-                      ]
-                  },
-                  "runsc-systrap": {
-                      "path": "/usr/local/bin/runsc",
-                      "runtimeArgs": [
-                          "--platform=systrap",
-                          "--network=host"
-                      ]
-                  },
-                  "runsc-kvm --host-uds=open": {
-                      "path": "/usr/local/bin/runsc",
-                      "runtimeArgs": [
-                          "--platform=kvm",
-                          "--network=host",
-                          "--host-uds=open"
-                      ]
-                  },
-                  "runsc-systrap --host-uds=open": {
-                      "path": "/usr/local/bin/runsc",
-                      "runtimeArgs": [
-                          "--platform=systrap",
-                          "--network=host",
-                          "--host-uds=open"
-                      ]
-                  },
-                  "runsc-kvm-debug": {
-                      "path": "/usr/local/bin/runsc",
-                      "runtimeArgs": [
-                          "--platform=kvm",
-                          "--network=host",
-                          "--debug-log=/tmp/runsc-kvm/",
-                          "--debug",
-                          "--strace"
-                      ]
-                  },
-                  "runsc-systrap-debug": {
-                      "path": "/usr/local/bin/runsc",
-                      "runtimeArgs": [
-                          "--platform=systrap",
-                          "--network=host",
-                          "--debug-log=/tmp/runsc-systrap/",
-                          "--debug",
-                          "--strace"
-                      ]
-                  }
-              }
-          }
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.servcice.d/override.conf
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/Phoenix

@@ -54,22 +54,25 @@
       {
         "path": "/etc/zincati/config.d/51-rollout-wariness.toml",
         "contents": {
-          "compression": "",
-          "source": "data:,%5Bidentity%5D%0Arollout_wariness%20%3D%200%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/zincati/config.d/51-rollout-wariness.toml"
         }
       },
       {
         "path": "/etc/zincati/config.d/55-updates-strategy.toml",
         "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/2SNMarEMAxEe51C6ADB1S8+5BRbGmNMLLIGRw62TMieflGRats3b2b8PHNSHgGG9qS837gindxLy2UjePLlQQG0HBw/TdjM2rZUjRD4H3e5iuR2hQA53QNX9EivKYT2lrpGK9qK+3eOoLLs+o5Hkals+p+DbwAAAP//4Po2vKAAAAA="
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/zincati/config.d/55-updates-strategy.toml"
         }
       },
       {
         "path": "/etc/yum.repos.d/docker-ce.repo",
         "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/7zSsU+EMBTH8b1/BcOtvepqwuS5upybcSjt7wqh15K2qPffGyjKQCAm8pxoHqQvn/B91V61CFyBxyQrizfm5BXlaRwXj0/FeRwXvDhUMkIGVbPh0Adb1il18UEI7T+c9VIf82VH5a/CNq7/FBdoH6Q4BFjIiHcE8XONyAsZ3PDQ5T0znVE1VJuPLW6/32A6w9gCwzWq3jTu4tdZp+9P9gKOO/kq846AGX0f1MavO4/v499ceQkpJyGmheIFMVHkNyyjY2ykN4HIwyMGrkQ36fZMjg7iGlMne1sgnvOcIrtpJalnI75ZRt7fv0hXKpyZe4a4u+grAAD//29EVAF/BwAA"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/docker-ce.repo"
+        }
+      },
+      {
+        "path": "/etc/docker/daemon.json",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/docker/daemon.json"
         }
       },
       {
@@ -116,79 +119,64 @@
         }
       },
       {
+        "path": "/etc/ssh/sshd_config.d/10-custom.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf"
+        }
+      },
+      {
         "path": "/etc/systemd/system/sshd.service.d/local.conf",
         "contents": {
           "source": "https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf"
         }
       },
       {
-        "path": "/etc/ssh/sshd_config/10-custom.conf",
+        "path": "/etc/ssh/ssh_config.d/10-custom.conf",
         "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config/10-custom.conf"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf"
         }
       },
       {
         "path": "/etc/tuned/active_profile",
         "contents": {
-          "compression": "",
-          "source": "data:,virtual-guest%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/active_profile"
         }
       },
       {
         "path": "/etc/tuned/profile_mode",
         "contents": {
-          "compression": "",
-          "source": "data:,manual%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/profile_mode"
         }
       },
       {
         "path": "/etc/systemd/zram-generator.conf",
         "contents": {
-          "compression": "",
-          "source": "data:,%5Bzram0%5D%0Azram-fraction%20%3D%201%0Amax-zram-size%20%3D%208192%0Acompression-algorithm%20%3D%20zstd%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/zram-generator.conf"
         }
       },
       {
         "path": "/etc/security/limits.d/30-disable-coredump.conf",
         "contents": {
-          "compression": "",
-          "source": "data:,*%20hard%20core%200%0A"
-        }
-      },
-      {
-        "path": "/etc/ssh/ssh_config.d/10-custom.conf",
-        "contents": {
-          "compression": "",
-          "source": "data:,GSSAPIAuthentication%20no%0AVerifyHostKeyDNS%20yes%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/security/limits.d/30-disable-coredump.conf"
         }
       },
       {
         "overwrite": true,
         "path": "/etc/sysconfig/chronyd",
         "contents": {
-          "compression": "",
-          "source": "data:,%23%20Command-line%20options%20for%20chronyd%0AOPTIONS%3D%22-F%201%22%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd"
         }
       },
       {
         "path": "/etc/unbound/unbound.conf",
         "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/6xSQWvcPBC9768Q/s5jezfZ5MNQ6CWFQktL00uPE2lsD5ElZzTa1Pn1RbtdlyyFQqkNxp4373ne0ySSA0m3McaOEqN2pqo2G2MwawSVnBQw2DEK9OypM1VzQGk8PzQ5PMQcXFNY9SMt1caYV4TEQ0DPYejMQmljTOmER1ogUVAO5E9A4fkElkThIQdXftOQ2iYl35RqaiweYe7ZolKqreiZxfNIkjpTff7y6d37D3dv7r/df737eDQxsiMYVWfIiQRwoKDnYY4YuzKJLq+KRxMnD6/qB5LEMaxDOwoLYPhFRnEUAP0QwcXnMAg6ugA9ykDwlEmY0gUm1JMIephRxwssjfGYTp/4ZdXkIUQhsA56j2vKE36H7GY4dV61t7tSjC57AhtDz0NnqgN6dqhRDCtJeSnH9xRwIpg48MQJlWOApMJ2DS2HZwxKDoRmv4COQmmM3nVm256u0pQILM4J+ijAbs0rZh0ihwHm4mUmmVgLcXcNN/v91b70zCUEtav983dZm59CfZRnFAcvMVDZ2zJzZ6q6GDhjZTPynFQIp7PUGUPnpDPbuty7t//vr/5LZLOwLrX1MbveoxC4kGobp9/w2rr9C97upr3prm/b9vTottvtPxBp2z+L/AgAAP//qRxiA+IDAAA="
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/unbound/unbound.conf"
         }
       },
       {
         "path": "/etc/systemd/system/unbound.service.d/override.conf",
         "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/2yRQWvcPBCG7/srBN8hp+T43Qxekt12ycYsiUsLpRRZfrMZLGvMzMjEl/72oqUbauhJo2dmmNGj7y+QmQJ+bJ4wsiwPSMtXIcPuHSEbKpOMzUlo9oYHlFJdsXacrnc2BPvMI1bgPnIY1oSTCcdPwnnSVeYRkhCPfP4XfuI+x+v0/1z7Ruo6gR/UZaV0dsphgDmejDipizTA3SjfSpi7/Hpz53bvU6RAFhfXk/ouwr2yuJmUOopky916YptTKVovcxIOFaVLU8TmGWpCwbZ9L1Dd+5EiQavt/ueh2bXuz/l/CZpdezw0jyX80hy+ffQ+w0ejq7eXRQ3jvY9xK+GNysws0Cp5o/nv9J6iQapfdSiKXR2mfIsxR1/e7+oeXT67esAixU49Xvy5kXMyV3OnHGFwtUA5S4B+7NP4ETr58tULdHPkMJwgyskXSRf2OwAA///OGG3DOAIAAA=="
-        }
-      },
-      {
-        "path": "/etc/docker/daemon.json",
-        "contents": {
-          "compression": "gzip",
-          "source": "data:;base64,H4sIAAAAAAAC/9RSS2rDMBDd+xRCaw/aB7zoOUoXiq04wfqhGbmUkrsXyU6oiigNNWmzMVjz5ul99N4wxhgf1EFGTRCipZNRfMd4iBZ7wDekID1vF9w6R75jy+blFHuYZlMc55GXdExsImIQ2vVSi/3Jiryxkn6mSeRPYUz8z8UwAwC8lnRwwXTpsraGsIpeXZi6o0PiBeDl+nduv2q/2Lyb/jLXTTxMs2EAaQfigJ3zyv63PqqIUvGtlf2d5Z9XuKXtaTYwqH0cH6LbrBS0GztBxourBfENvD5KWffq5udx76x++Siqea2cm2fWLN9z8xEAAP//Je94AgUGAAA="
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.servcice.d/override.conf"
         }
       }
     ],
