@@ -2,7 +2,7 @@
 strategy = "periodic"
 
 [updates.periodic]
-time_zone = "America/Phoenix"
+time_zone = "localtime"
 
 [[updates.periodic.window]]
 days = [ "Sun" ]
