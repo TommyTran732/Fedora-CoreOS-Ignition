@@ -98,10 +98,10 @@ systemd:
         WorkingDirectory=/var/home/unpriv
         Type=oneshot
         ExecStart=/usr/bin/sleep 5
-        ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc
-        ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512
-        ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1
-        ExecStart=/usr/bin/sudo -u unpriv /usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512
+        ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc
+        ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512
+        ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1
+        ExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512
 
         [Install]
         WantedBy=multi-user.target
