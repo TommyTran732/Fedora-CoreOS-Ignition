@@ -130,7 +130,7 @@ systemd:
         [Unit]
         Description=Update containers with Docker-Compose
         Requires=network-online.target
-        After=docker.service
+        Requires=docker.service
 
         [Service]
         WorkingDirectory=/path/to/directory

@@ -1,0 +1,265 @@
+{
+  "ignition": {
+    "version": "3.4.0"
+  },
+  "kernelArguments": {
+    "shouldExist": [
+      "mitigations=auto,nosmt",
+      "spectre_v2=on",
+      "spec_store_bypass_disable=on",
+      "tsx=off",
+      "kvm.nx_huge_pages=force",
+      "nosmt=force",
+      "l1d_flush=on",
+      "spec_rstack_overflow=safe-ret",
+      "random.trust_bootloader=off",
+      "random.trust_cpu=off",
+      "intel_iommu=on",
+      "amd_iommu=force_isolation",
+      "efi=disable_early_pci_dma",
+      "iommu=force",
+      "iommu.passthrough=0",
+      "iommu.strict=1",
+      "slab_nomerge",
+      "init_on_alloc=1",
+      "init_on_free=1",
+      "pti=on",
+      "vsyscall=none",
+      "ia32_emulation=0",
+      "page_alloc.shuffle=1",
+      "randomize_kstack_offset=on",
+      "extra_latent_entropy",
+      "debugfs=off"
+    ]
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "sudo"
+        ],
+        "name": "tomster",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkTKkJS7Id1WCyA5Klu/moLG9mP5hTC+v2qYqypMF1u contact@tommytran.io"
+        ]
+      },
+      {
+        "name": "unpriv"
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/zincati/config.d/51-rollout-wariness.toml",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/zincati/config.d/51-rollout-wariness.toml"
+        }
+      },
+      {
+        "path": "/etc/zincati/config.d/55-updates-strategy.toml",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/zincati/config.d/55-updates-strategy.toml"
+        }
+      },
+      {
+        "path": "/etc/yum.repos.d/docker-ce.repo",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/docker-ce.repo"
+        }
+      },
+      {
+        "path": "/etc/docker/daemon.json",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/docker/daemon.json"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/chrony.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf"
+        }
+      },
+      {
+        "path": "/etc/modprobe.d/30_security-misc.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/Kicksecure/security-misc/master/etc/modprobe.d/30_security-misc.conf"
+        }
+      },
+      {
+        "path": "/etc/sysctl.d/990-security-misc.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/990-security-misc.conf"
+        }
+      },
+      {
+        "path": "/etc/sysctl.d/30_silent-kernel-printk.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_silent-kernel-printk.conf"
+        }
+      },
+      {
+        "path": "/etc/sysctl.d/30_security-misc_kexec-disable.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/Kicksecure/security-misc/master/usr/lib/sysctl.d/30_security-misc_kexec-disable.conf"
+        }
+      },
+      {
+        "path": "/etc/systemd/system/NetworkManager.service.d/99-brace.conf",
+        "contents": {
+          "source": "https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf"
+        }
+      },
+      {
+        "path": "/etc/systemd/system/irqbalance.service.d/99-brace.conf",
+        "contents": {
+          "source": "https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/irqbalance.service.d/99-brace.conf"
+        }
+      },
+      {
+        "path": "/etc/ssh/sshd_config.d/10-custom.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf"
+        }
+      },
+      {
+        "path": "/etc/ssh/ssh_config.d/10-custom.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf"
+        }
+      },
+      {
+        "path": "/etc/systemd/system/sshd.service.d/local.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf"
+        }
+      },
+      {
+        "path": "/etc/tuned/active_profile",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/tuned/active_profile"
+        }
+      },
+      {
+        "path": "/etc/tuned/profile_mode",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/tuned/profile_mode"
+        }
+      },
+      {
+        "path": "/etc/systemd/zram-generator.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/zram-generator.conf"
+        }
+      },
+      {
+        "path": "/etc/security/limits.d/30-disable-coredump.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/security/limits.d/30-disable-coredump.conf"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/sysconfig/chronyd",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd"
+        }
+      },
+      {
+        "path": "/etc/unbound/unbound.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/unbound/unbound.conf"
+        }
+      },
+      {
+        "path": "/etc/systemd/system/unbound.service.d/override.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.service.d/override.conf"
+        }
+      }
+    ],
+    "links": [
+      {
+        "path": "/etc/localtime",
+        "target": "../usr/share/zoneinfo/America/Phoenix"
+      },
+      {
+        "path": "/etc/systemd/system/multi-user.target.wants/unbound.service",
+        "target": "/usr/lib/systemd/system/unbound.service"
+      },
+      {
+        "path": "/etc/systemd/system/multi-user.target.wants/tuned.service",
+        "target": "/usr/lib/systemd/system/tuned.service"
+      },
+      {
+        "path": "/etc/systemd/system/kdump.service",
+        "target": "/dev/null"
+      },
+      {
+        "path": "/etc/systemd/system/debug-shell.service",
+        "target": "/dev/null"
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Initial System Setup\n# We run after `systemd-machine-id-commit.service` to ensure that\n# `ConditionFirstBoot=true` services won't rerun on the next boot.\nAfter=systemd-machine-id-commit.service\nAfter=network-online.target\n# We run before `zincati.service` to avoid conflicting rpm-ostree\n# transactions.\nBefore=zincati.service\nConditionPathExists=!/var/lib/%N.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd moby-engine runc samba-common-libs samba-client-libs libsmbclient libwbclient samba-common sssd-krb5-common sssd-ipa sssd-nfs-idmap sssd-ldap sssd-client sssd-ad sssd-common sssd-krb5 sssd-common-pac\nExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld qemu-guest-agent tuned unbound\nExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth\nExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/# install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf\nExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=1/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all=1/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all=1/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf\nExecStart=/usr/bin/systemctl disable systemd-resolved\nExecStart=/usr/bin/touch /var/lib/%N.stamp\nExecStart=/usr/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "postinst.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Initial System Setup Part 2\n# We run this after the packages have been overlayed\nAfter=network-online.target\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/systemctl enable --now firewalld\nExecStart=/usr/bin/firewall-cmd --lockdown-on\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "postinst2.service"
+      },
+      {
+        "contents": "[Service]\nType=oneshot\nExecStart=/usr/sbin/setsebool container_use_cephfs off\nExecStart=/usr/sbin/setsebool virt_use_nfs off\nExecStart=/usr/sbin/setsebool virt_use_samba off\nRemainAfterExit=yes\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "setsebool.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=gVisor Download\nRequires=network-online.target\nBefore=docker.service\n\n[Service]\nUser=unpriv\nWorkingDirectory=/var/home/unpriv\nType=oneshot\nExecStart=/usr/bin/sleep 5\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "gvisor-downloader.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Copy gVisor to the correct location\nAfter=gvisor-downloader.service\n\n[Service]\nWorkingDirectory=/var/home/unpriv\nType=oneshot\nExecStart=/usr/bin/sha512sum -c runsc.sha512 -c containerd-shim-runsc-v1.sha512\nExecStart=/usr/bin/rm -f runsc.sha512 containerd-shim-runsc-v1.sha512\nExecStart=/usr/bin/chown root:root runsc containerd-shim-runsc-v1\nExecStart=/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1\nExecStart=/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin\nExecStart=/usr/bin/chcon system_u:object_r:container_runtime_exec_t:s0 /var/usrlocal/bin/runsc\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "gvisor-updater.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Update containers with Docker-Compose\nRequires=network-online.target\nRequires=docker.service\n\n[Service]\nWorkingDirectory=/path/to/directory\nType=oneshot\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": false,
+        "name": "docker-compose-updater.service"
+      },
+      {
+        "enabled": true,
+        "name": "docker.service"
+      },
+      {
+        "enabled": true,
+        "name": "fstrim.timer"
+      },
+      {
+        "enabled": true,
+        "name": "systemd-oomd.service"
+      },
+      {
+        "enabled": false,
+        "mask": true,
+        "name": "rpm-ostree-countme.timer"
+      },
+      {
+        "enabled": false,
+        "name": "sshd.service"
+      },
+      {
+        "enabled": true,
+        "name": "sshd.socket"
+      }
+    ]
+  }
+}
