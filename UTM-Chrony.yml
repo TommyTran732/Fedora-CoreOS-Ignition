@@ -164,7 +164,7 @@ storage:
         source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/unbound/unbound.conf
     - path: /etc/systemd/system/unbound.service.d/override.conf
       contents:
-        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.servcice.d/override.conf
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.service.d/override.conf
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/Phoenix
