@@ -125,27 +125,27 @@
         }
       },
       {
-        "path": "/etc/systemd/system/sshd.service.d/local.conf",
-        "contents": {
-          "source": "https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf"
-        }
-      },
-      {
         "path": "/etc/ssh/ssh_config.d/10-custom.conf",
         "contents": {
           "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf"
         }
       },
       {
+        "path": "/etc/systemd/system/sshd.service.d/local.conf",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf"
+        }
+      },
+      {
         "path": "/etc/tuned/active_profile",
         "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/active_profile"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/tuned/active_profile"
         }
       },
       {
         "path": "/etc/tuned/profile_mode",
         "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/profile_mode"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/tuned/profile_mode"
         }
       },
       {

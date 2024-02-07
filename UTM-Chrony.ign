@@ -126,13 +126,13 @@
       {
         "path": "/etc/tuned/active_profile",
         "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/active_profile"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/tuned/active_profile"
         }
       },
       {
         "path": "/etc/tuned/profile_mode",
         "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/tuned/profile_mode"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/tuned/profile_mode"
         }
       },
       {
