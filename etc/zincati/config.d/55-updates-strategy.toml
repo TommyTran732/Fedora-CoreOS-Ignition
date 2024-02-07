@@ -1,7 +1,9 @@
 [updates]
 strategy = "periodic"
+
 [updates.periodic]
-time_zone = "localtime"
+time_zone = "America/Phoenix"
+
 [[updates.periodic.window]]
 days = [ "Sun" ]
 start_time = "0:00"

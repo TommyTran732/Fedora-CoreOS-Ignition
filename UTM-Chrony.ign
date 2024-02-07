@@ -51,8 +51,7 @@
       {
         "path": "/etc/zincati/config.d/51-rollout-wariness.toml",
         "contents": {
-          "compression": "",
-          "source": "data:,%5Bidentity%5D%0Arollout_wariness%20%3D%200%0A"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/zincati/config.d/51-rollout-wariness.toml"
         }
       },
       {
