@@ -89,7 +89,7 @@ systemd:
       enabled: true
       contents: |
         [Unit]
-        Description=gVisor Download
+        Description=Download gVisor
         Requires=network-online.target
         Before=docker.service
 
