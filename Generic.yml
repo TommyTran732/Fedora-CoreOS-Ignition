@@ -42,7 +42,7 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/rpm-ostree override remove bind-license bind-libs bind-utils cifs-utils containerd containers-common-extra crun-wasm crun dnsmasq e2fsprogs flatpak-session-helper fuse-overlayfs fuse-sshfs fuse3 libwbclient samba-common-libs samba-common samba-client-libs libsmbclient moby-engine podman podman-plugins runc ssd-ipa sssd-common sssd-nfs-idmap sssd-ldap sssd-ad sssd-krb5 sssd-client sssd-common-pac sssd-krb5-common toolbox
+        ExecStart=/usr/bin/rpm-ostree override remove bind-license bind-libs bind-utils cifs-utils containerd containers-common-extra crun-wasm crun dnsmasq e2fsprogs flatpak-session-helper fuse-overlayfs fuse-sshfs fuse3 libwbclient samba-common-libs samba-common samba-client-libs libsmbclient moby-engine podman podman-plugins runc sssd-ipa sssd-common sssd-nfs-idmap sssd-ldap sssd-ad sssd-krb5 sssd-client sssd-common-pac sssd-krb5-common toolbox
         ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/sed -i 's/nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf
