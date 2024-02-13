@@ -221,6 +221,14 @@ storage:
     - path: /etc/systemd/system/unbound.service.d/override.conf
       contents:
         source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.service.d/override.conf
+    - path: /etc/issue
+      overwrite: true
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/issue
+    - path: /etc/issue.net
+      overwrite: true
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/issue
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/Phoenix

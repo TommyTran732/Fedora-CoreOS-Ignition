@@ -178,6 +178,20 @@
         "contents": {
           "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.service.d/override.conf"
         }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/issue",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/issue"
+        }
+      },
+      {
+        "overwrite": true,
+        "path": "/etc/issue.net",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/issue"
+        }
       }
     ],
     "links": [
