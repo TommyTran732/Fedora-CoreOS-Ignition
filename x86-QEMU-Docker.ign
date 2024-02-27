@@ -236,7 +236,7 @@
         "name": "postinst.service"
       },
       {
-        "contents": "[Unit]\nDescription=Initial System Setup Part 2\n# We run this after the packages have been overlayed\nAfter=network-online.target\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/echo \"/lib64/glibc-hwcaps/x86-64-v3/libhardened_malloc.so\" | tee /etc/ld.so.preload\nExecStart=/usr/bin/systemctl enable --now firewalld\nExecStart=/usr/bin/firewall-cmd --lockdown-on\nExecStart=/usr/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Initial System Setup Part 2\n# We run this after the packages have been overlayed\nAfter=network-online.target\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/echo \"libhardened_malloc.so\" | tee /etc/ld.so.preload\nExecStart=/usr/bin/systemctl enable --now firewalld\nExecStart=/usr/bin/firewall-cmd --lockdown-on\nExecStart=/usr/bin/systemctl --no-block reboot\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "postinst2.service"
       },

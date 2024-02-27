@@ -69,7 +69,7 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
-        ExecStart=/usr/bin/echo "/lib64/glibc-hwcaps/x86-64-v3/libhardened_malloc.so" | tee /etc/ld.so.preload
+        ExecStart=/usr/bin/echo "libhardened_malloc.so" | tee /etc/ld.so.preload
         ExecStart=/usr/bin/systemctl enable --now firewalld
         ExecStart=/usr/bin/firewall-cmd --lockdown-on
         ExecStart=/usr/bin/systemctl --no-block reboot
