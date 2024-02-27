@@ -208,5 +208,4 @@ kernel_arguments:
     - ia32_emulation=0
     - page_alloc.shuffle=1
     - randomize_kstack_offset=on
-    - extra_latent_entropy
     - debugfs=off
