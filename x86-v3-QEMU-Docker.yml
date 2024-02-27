@@ -43,7 +43,7 @@ systemd:
         Type=oneshot
         RemainAfterExit=yes
         ExecStart=/usr/bin/rpm-ostree override remove bind-license bind-utils bind-libs brcmfmac-firmware intel-gpu-firmware mt7xxx-firmware atheros-firmware amd-ucode-firmware linux-firmware amd-gpu-firmware realtek-firmware btrfs-progs cifs-utils clevis clevis-dracut clevis-luks clevis-systemd containerd containers-common-extra crun crun-wasm cryptsetup dnsmasq e2fsprogs-libs e2fsprogs flatpak-session-helper fuse-overlayfs fuse-sshfs fuse3 fwupd google-compute-engine-guest-configs-udev iptables-legacy iptables-legacy-libs kexec-tools libnvme lvm2 lvm2-libs mdadm moby-engine nvme-cli podman podman-plugins rsync runc samba-client-libs samba-common libwbclient libsmbclient samba-common-libs socat sssd-client sssd-ldap sssd-common sssd-krb5-common sssd-nfs-idmap sssd-ad sssd-krb5 sssd-ipa sssd-common-pac systemd-resolved toolbox tpm2-tools tpm2-tss-fapi vim-data vim-minimal wireguard-tools
-        ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld qemu-guest-agent tuned unbound
+        ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld hardened_malloc qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/sed -i 's/# install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf
@@ -69,8 +69,10 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
+        ExecStart=/usr/bin/echo "/lib64/glibc-hwcaps/x86-64-v3/libhardened_malloc.so" | tee /etc/ld.so.preload
         ExecStart=/usr/bin/systemctl enable --now firewalld
         ExecStart=/usr/bin/firewall-cmd --lockdown-on
+        ExecStart=/usr/bin/systemctl --no-block reboot
 
         [Install]
         WantedBy=multi-user.target
@@ -168,6 +170,12 @@ storage:
     - path: /etc/docker/daemon.json
       contents:
         source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/docker/daemon.json
+    - path: /etc/yum.repos.d/divested-release.repo
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/divested-release.repo
+    - path: /etc/pki/rpm-gpg/RPM-GPG-KEY-divested
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/pki/rpm-gpg/RPM-GPG-KEY-divested
     - path: /etc/chrony.conf
       contents:
         source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf

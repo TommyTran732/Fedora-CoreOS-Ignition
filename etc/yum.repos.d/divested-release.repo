@@ -1,0 +1,12 @@
+[divested]
+name=Divested RPM Repository
+#baseurl=https://divested.dev/rpm/fedora
+metalink=https://divested.dev/rpm/fedora/metalink.metalink
+enabled=1
+metadata_expire=7d
+repo_gpgcheck=1
+type=rpm
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-divested
+skip_if_unavailable=True
+includepkgs=divested-release,real-ucode,microcode_ctl,amd-ucode-firmware,hardened_malloc
