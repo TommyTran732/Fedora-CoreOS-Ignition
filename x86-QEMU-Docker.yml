@@ -72,6 +72,7 @@ systemd:
         ExecStart=/usr/bin/echo 'libhardened_malloc.so' | tee /etc/ld.so.preload
         ExecStart=/usr/bin/systemctl enable --now firewalld
         ExecStart=/usr/bin/firewall-cmd --lockdown-on
+        ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
 
         [Install]
