@@ -278,3 +278,5 @@ kernel_arguments:
     - page_alloc.shuffle=1
     - randomize_kstack_offset=on
     - debugfs=off
+    - console=tty0
+    - console=ttyS0,115200

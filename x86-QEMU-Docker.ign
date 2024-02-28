@@ -28,7 +28,9 @@
       "ia32_emulation=0",
       "page_alloc.shuffle=1",
       "randomize_kstack_offset=on",
-      "debugfs=off"
+      "debugfs=off",
+      "console=tty0",
+      "console=ttyS0,115200"
     ]
   },
   "passwd": {
