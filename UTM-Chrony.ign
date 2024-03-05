@@ -12,6 +12,8 @@
       "nosmt=force",
       "l1d_flush=on",
       "spec_rstack_overflow=safe-ret",
+      "module.sig_enforce=1",
+      "lockdown=confidentiality",
       "random.trust_bootloader=off",
       "random.trust_cpu=off",
       "intel_iommu=on",
