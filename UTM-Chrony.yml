@@ -111,6 +111,9 @@ storage:
         inline: |
           [updates]
           strategy = "immediate"
+    - path: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:hardened_malloc.repo
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:hardened_malloc.repo
     - path: /etc/chrony.conf
       contents:
         source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf

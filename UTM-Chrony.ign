@@ -61,6 +61,12 @@
         }
       },
       {
+        "path": "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:hardened_malloc.repo",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:hardened_malloc.repo"
+        }
+      },
+      {
         "overwrite": true,
         "path": "/etc/chrony.conf",
         "contents": {
