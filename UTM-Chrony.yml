@@ -54,6 +54,8 @@ systemd:
         ExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope=2/kernel.yama.ptrace_scope=1/g' /etc/sysctl.d/990-security-misc.conf
         ExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all=1/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf
         ExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all=1/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf
+        ExecStart=/usr/bin/echo 'EDITOR=nano' >> /etc/bashrc
+        ExecStart=/usr/bin/echo 'VISUAL=nano' >> /etc/bashrc
         ExecStart=/usr/bin/systemctl disable systemd-resolved
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
