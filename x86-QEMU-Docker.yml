@@ -158,6 +158,9 @@ systemd:
     - name: debug-shell.service
       enabled: false
       mask: true
+    - name: coreos-cni-networking-check.service
+      enabled: false
+      mask: true
 storage:
   files:
     - path: /etc/zincati/config.d/51-rollout-wariness.toml

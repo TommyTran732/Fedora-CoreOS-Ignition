@@ -248,6 +248,11 @@
         "enabled": false,
         "mask": true,
         "name": "debug-shell.service"
+      },
+      {
+        "enabled": false,
+        "mask": true,
+        "name": "coreos-cni-networking-check.service"
       }
     ]
   }
