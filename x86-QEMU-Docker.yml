@@ -140,6 +140,18 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
+    - name: docker-compose-updater.timer
+      enabled: false
+      contents: |
+        [Unit]
+        Description=Run docker-compose-updater once a week, 15 minutes after OS update
+
+        [Timer]
+        OnCalendar=Fri 0:15
+        Persistent=true
+
+        [Install]
+        WantedBy=timers.target
     - name: docker.service
       enabled: true
     - name: fstrim.timer

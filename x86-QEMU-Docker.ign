@@ -252,6 +252,11 @@
         "name": "docker-compose-updater.service"
       },
       {
+        "contents": "[Unit]\nDescription=Run docker-compose-updater once a week, 15 minutes after OS update\n\n[Timer]\nOnCalendar=Fri 0:15\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n",
+        "enabled": false,
+        "name": "docker-compose-updater.timer"
+      },
+      {
         "enabled": true,
         "name": "docker.service"
       },
