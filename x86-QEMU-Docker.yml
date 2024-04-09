@@ -136,12 +136,10 @@ systemd:
         [Service]
         WorkingDirectory=/path/to/directory
         Type=oneshot
+        ExecStart=/usr/bin/docker image prune -f
         #ExecStart=/usr/bin/git pull
         ExecStart=/usr/bin/docker compose pull
         ExecStart=/usr/bin/docker compose up -d
-
-        [Install]
-        WantedBy=multi-user.target
     - name: docker-compose-updater.timer
       enabled: false
       contents: |

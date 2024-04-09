@@ -247,7 +247,7 @@
         "name": "gvisor-updater.service"
       },
       {
-        "contents": "[Unit]\nDescription=Update containers with Docker-Compose\nRequires=network-online.target\nRequires=docker.service\n\n[Service]\nWorkingDirectory=/path/to/directory\nType=oneshot\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Update containers with Docker-Compose\nRequires=network-online.target\nRequires=docker.service\n\n[Service]\nWorkingDirectory=/path/to/directory\nType=oneshot\nExecStart=/usr/bin/docker image prune -f\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n",
         "enabled": false,
         "name": "docker-compose-updater.service"
       },
