@@ -196,8 +196,6 @@ kernel_arguments:
     - nosmt=force
     - l1d_flush=on
     - spec_rstack_overflow=safe-ret
-    - module.sig_enforce=1
-    - lockdown=confidentiality
     - random.trust_bootloader=off
     - random.trust_cpu=off
     - intel_iommu=on
@@ -215,3 +213,5 @@ kernel_arguments:
     - page_alloc.shuffle=1
     - randomize_kstack_offset=on
     - debugfs=off
+    - lockdown=confidentiality
+    - module.sig_enforce=1
