@@ -125,26 +125,29 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
-    - name: docker-compose-updater.service
+    - name: docker-compose-updater@.service
       enabled: false
       contents: |
         [Unit]
-        Description=Update containers with Docker-Compose
+        Description=Docker Compose Updater for /srv/%I
+        After=docker.service
         Requires=network-online.target
         Requires=docker.service
 
         [Service]
-        WorkingDirectory=/path/to/directory
         Type=oneshot
-        ExecStart=/usr/bin/docker image prune -f
+        User=root
+        Group=root
+        WorkingDirectory=/srv/%i
+        ExecStart=/usr/bin/docker image prune -f -a --filter 'until=240h'
         #ExecStart=/usr/bin/git pull
         ExecStart=/usr/bin/docker compose pull
         ExecStart=/usr/bin/docker compose up -d
-    - name: docker-compose-updater.timer
+    - name: docker-compose-updater@.timer
       enabled: false
       contents: |
         [Unit]
-        Description=Run docker-compose-updater once a week, 15 minutes after OS update
+        Description=Run docker-compose-updater for /srv/%I once a week, 15 mintues after OS updates
 
         [Timer]
         OnCalendar=Fri 0:15

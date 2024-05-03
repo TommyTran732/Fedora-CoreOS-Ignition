@@ -247,14 +247,14 @@
         "name": "gvisor-updater.service"
       },
       {
-        "contents": "[Unit]\nDescription=Update containers with Docker-Compose\nRequires=network-online.target\nRequires=docker.service\n\n[Service]\nWorkingDirectory=/path/to/directory\nType=oneshot\nExecStart=/usr/bin/docker image prune -f\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n",
+        "contents": "[Unit]\nDescription=Docker Compose Updater for /srv/%I\nAfter=docker.service\nRequires=network-online.target\nRequires=docker.service\n\n[Service]\nType=oneshot\nUser=root\nGroup=root\nWorkingDirectory=/srv/%i\nExecStart=/usr/bin/docker image prune -f -a --filter 'until=240h'\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n",
         "enabled": false,
-        "name": "docker-compose-updater.service"
+        "name": "docker-compose-updater@.service"
       },
       {
-        "contents": "[Unit]\nDescription=Run docker-compose-updater once a week, 15 minutes after OS update\n\n[Timer]\nOnCalendar=Fri 0:15\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n",
+        "contents": "[Unit]\nDescription=Run docker-compose-updater for /srv/%I once a week, 15 mintues after OS updates\n\n[Timer]\nOnCalendar=Fri 0:15\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n",
         "enabled": false,
-        "name": "docker-compose-updater.timer"
+        "name": "docker-compose-updater@.timer"
       },
       {
         "enabled": true,
