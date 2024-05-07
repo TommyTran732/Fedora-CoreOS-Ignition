@@ -81,6 +81,7 @@ systemd:
         ExecStart=/usr/bin/firewall-cmd --lockdown-on
         ExecStart=/usr/bin/firewall-cmd --permanent --remove-service=mds
         ExecStart=/usr/bin/firewall-cmd --permanent --remove-service=dhcpv6-client
+        ExecStart=/usr/bin/rm /etc/unbound/unbound_control.key
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
 
