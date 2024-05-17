@@ -254,11 +254,11 @@ storage:
     - path: /etc/issue
       overwrite: true
       contents:
-        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/issue
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/issue
     - path: /etc/issue.net
       overwrite: true
       contents:
-        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/issue
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/issue
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/America/Phoenix
