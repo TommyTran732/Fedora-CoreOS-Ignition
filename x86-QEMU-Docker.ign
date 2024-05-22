@@ -237,7 +237,7 @@
         "name": "postinst2.service"
       },
       {
-        "contents": "[Unit]\nDescription=Download gVisor\nRequires=network-online.target\nBefore=docker.service\n\n[Service]\nUser=unpriv\nWorkingDirectory=/var/home/unpriv\nType=oneshot\nExecStart=/usr/bin/sleep 5\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Download gVisor\nAfter=network-online.target\nBefore=docker.service\n\n[Service]\nUser=unpriv\nWorkingDirectory=/var/home/unpriv\nType=oneshot\nExecStart=/usr/bin/sleep 5\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1\nExecStart=/usr/bin/curl -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "gvisor-downloader.service"
       },
@@ -247,7 +247,7 @@
         "name": "gvisor-updater.service"
       },
       {
-        "contents": "[Unit]\nDescription=Docker Compose Updater for /srv/%I\nAfter=docker.service\nRequires=network-online.target\nRequires=docker.service\n\n[Service]\nType=oneshot\nUser=root\nGroup=root\nWorkingDirectory=/srv/%i\nExecStart=/usr/bin/docker image prune -f -a --filter 'until=240h'\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n",
+        "contents": "[Unit]\nDescription=Docker Compose Updater for /srv/%I\nAfter=network-online.target\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nType=oneshot\nUser=root\nGroup=root\nWorkingDirectory=/srv/%i\nExecStart=/usr/bin/docker image prune -f -a --filter 'until=240h'\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n",
         "enabled": false,
         "name": "docker-compose-updater@.service"
       },

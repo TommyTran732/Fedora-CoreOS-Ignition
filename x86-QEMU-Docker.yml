@@ -92,7 +92,7 @@ systemd:
       contents: |
         [Unit]
         Description=Download gVisor
-        Requires=network-online.target
+        After=network-online.target
         Before=docker.service
 
         [Service]
@@ -131,8 +131,8 @@ systemd:
       contents: |
         [Unit]
         Description=Docker Compose Updater for /srv/%I
+        After=network-online.target
         After=docker.service
-        Requires=network-online.target
         Requires=docker.service
 
         [Service]
