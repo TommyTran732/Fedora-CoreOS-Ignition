@@ -49,9 +49,9 @@ systemd:
         ExecStart=/usr/bin/rpm-ostree override remove bind-license bind-utils bind-libs brcmfmac-firmware intel-gpu-firmware mt7xxx-firmware atheros-firmware amd-ucode-firmware linux-firmware amd-gpu-firmware realtek-firmware btrfs-progs cifs-utils clevis clevis-dracut clevis-luks clevis-pin-tpm2 clevis-systemd containerd containers-common-extra crun crun-wasm cryptsetup dnsmasq e2fsprogs-libs e2fsprogs flatpak-session-helper fuse-overlayfs fuse-sshfs fuse3 fwupd google-compute-engine-guest-configs-udev iptables-legacy iptables-legacy-libs kexec-tools libnvme lvm2 lvm2-libs mdadm moby-engine nvme-cli podman rsync runc samba-client-libs samba-common libwbclient libsmbclient samba-common-libs socat sssd-client sssd-ldap sssd-common sssd-krb5-common sssd-nfs-idmap sssd-ad sssd-krb5 sssd-ipa sssd-common-pac systemd-resolved toolbox tpm2-tools tpm2-tss-fapi vim-data vim-minimal wireguard-tools
         ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld hardened_malloc qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
-        ExecStart=/usr/bin/sed -i 's/#install msr/install msr/g' /etc/modprobe.d/30_security-misc.conf
-        ExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf
-        ExecStart=/usr/bin/sed -i 's/# install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf
+        ExecStart=/usr/bin/sed -i 's/#[[:space:]]*install msr/install msr/g' /etc/modprobe.d/30_security-misc.conf
+        ExecStart=/usr/bin/sed -i 's/#[[:space:]]*install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf
+        ExecStart=/usr/bin/sed -i 's/#[[:space:]]*install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/sed -i 's/kernel\.yama\.ptrace_scope[[:space:]]*=.*/kernel.yama.ptrace_scope=1/g' /etc/sysctl.d/990-security-misc.conf
         ExecStart=/usr/bin/sed -i 's/net\.ipv4\.icmp_echo_ignore_all[[:space:]]*=.*/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf
         ExecStart=/usr/bin/sed -i 's/net\.ipv6\.icmp.echo_ignore_all[[:space:]]*=.*/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf
