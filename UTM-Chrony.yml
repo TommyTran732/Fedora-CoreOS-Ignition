@@ -52,9 +52,9 @@ systemd:
         ExecStart=/usr/bin/sed -i 's/#install msr/install msr/g' /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/sed -i 's/# install bluetooth/install bluetooth/g' /etc/modprobe.d/30_security-misc.conf
         ExecStart=/usr/bin/sed -i 's/# install btusb/install btusb/g' /etc/modprobe.d/30_security-misc.conf
-        ExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope.*/kernel.yama.ptrace_scope=3/g' /etc/sysctl.d/990-security-misc.conf
-        ExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all.*/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf
-        ExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all.*/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf
+        ExecStart=/usr/bin/sed -i 's/kernel.yama.ptrace_scope[[:space:]]*=.*/kernel.yama.ptrace_scope=3/g' /etc/sysctl.d/990-security-misc.conf
+        ExecStart=/usr/bin/sed -i 's/net.ipv4.icmp_echo_ignore_all[[:space:]]*=.*/net.ipv4.icmp_echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf
+        ExecStart=/usr/bin/sed -i 's/net.ipv6.icmp.echo_ignore_all[[:space:]]*=.*/net.ipv6.icmp.echo_ignore_all=0/g' /etc/sysctl.d/990-security-misc.conf
         ExecStart=/usr/bin/echo 'EDITOR=nano' >> /etc/bashrc
         ExecStart=/usr/bin/echo 'VISUAL=nano' >> /etc/bashrc
         ExecStart=/usr/bin/systemctl disable systemd-resolved
