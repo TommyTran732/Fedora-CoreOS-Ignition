@@ -229,6 +229,9 @@ storage:
     - path: /etc/security/limits.d/30-disable-coredump.conf
       contents:
         source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf
+    - path: /etc/systemd/coredump.conf.d
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf
     - path: /etc/sysconfig/chronyd
       overwrite: true
       contents:

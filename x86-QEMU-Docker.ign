@@ -167,6 +167,12 @@
         }
       },
       {
+        "path": "/etc/systemd/coredump.conf.d",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf"
+        }
+      },
+      {
         "overwrite": true,
         "path": "/etc/sysconfig/chronyd",
         "contents": {
