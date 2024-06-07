@@ -70,6 +70,7 @@ systemd:
         [Service]
         Type=oneshot
         RemainAfterExit=yes
+        ExecStart=/usr/bin/echo 'libhardened_malloc.so' > /etc/ld.so.preload
         ExecStart=/usr/bin/systemctl enable --now firewalld
         ExecStart=/usr/bin/firewall-cmd --lockdown-on
         ExecStart=/usr/bin/firewall-cmd --permanent --add-service=ntp

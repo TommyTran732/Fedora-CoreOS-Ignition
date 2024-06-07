@@ -201,7 +201,7 @@
         "name": "postinst.service"
       },
       {
-        "contents": "[Unit]\nDescription=Initial System Setup Part 3\n# We run this after the packages have been overlayed\nAfter=firewalld.service\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/systemctl enable --now firewalld\nExecStart=/usr/bin/firewall-cmd --lockdown-on\nExecStart=/usr/bin/firewall-cmd --permanent --add-service=ntp\nExecStart=/usr/bin/firewall-cmd --reload\n\n[Install]\nWantedBy=multi-user.target\n",
+        "contents": "[Unit]\nDescription=Initial System Setup Part 3\n# We run this after the packages have been overlayed\nAfter=firewalld.service\nConditionPathExists=!/var/lib/%N.stamp\nConditionPathExists=/var/lib/postinst.stamp\n\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStart=/usr/bin/echo 'libhardened_malloc.so' \u003e /etc/ld.so.preload\nExecStart=/usr/bin/systemctl enable --now firewalld\nExecStart=/usr/bin/firewall-cmd --lockdown-on\nExecStart=/usr/bin/firewall-cmd --permanent --add-service=ntp\nExecStart=/usr/bin/firewall-cmd --reload\n\n[Install]\nWantedBy=multi-user.target\n",
         "enabled": true,
         "name": "postinst2.service"
       },

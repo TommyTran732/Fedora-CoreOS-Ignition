@@ -70,6 +70,12 @@
         }
       },
       {
+        "path": "/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:hardened_malloc.repo",
+        "contents": {
+          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:hardened_malloc.repo"
+        }
+      },
+      {
         "path": "/etc/yum.repos.d/docker-ce.repo",
         "contents": {
           "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/docker-ce.repo"
@@ -79,18 +85,6 @@
         "path": "/etc/docker/daemon.json",
         "contents": {
           "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/docker/daemon.json"
-        }
-      },
-      {
-        "path": "/etc/yum.repos.d/divested-release.repo",
-        "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/divested-release.repo"
-        }
-      },
-      {
-        "path": "/etc/pki/rpm-gpg/RPM-GPG-KEY-divested",
-        "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/pki/rpm-gpg/RPM-GPG-KEY-divested"
         }
       },
       {
