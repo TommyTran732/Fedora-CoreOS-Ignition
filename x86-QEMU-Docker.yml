@@ -286,5 +286,6 @@ kernel_arguments:
     - debugfs=off
     - lockdown=confidentiality
     - module.sig_enforce=1
+    - oops=panic
     - console=tty0
     - console=ttyS0,115200

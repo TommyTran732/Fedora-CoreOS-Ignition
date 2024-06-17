@@ -32,6 +32,7 @@
       "page_alloc.shuffle=1",
       "randomize_kstack_offset=on",
       "debugfs=off",
+      "oops=panic",
       "lockdown=confidentiality",
       "module.sig_enforce=1"
     ]
