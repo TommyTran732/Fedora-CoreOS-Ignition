@@ -170,7 +170,7 @@ storage:
         source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/issue
   links:
     - path: /etc/localtime
-      target: ../usr/share/zoneinfo/America/Phoenix
+      target: ../usr/share/zoneinfo/Etc/UTC
     - path: /etc/systemd/system/multi-user.target.wants/unbound.service
       target: /usr/lib/systemd/system/unbound.service
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service

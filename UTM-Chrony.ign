@@ -182,7 +182,7 @@
     "links": [
       {
         "path": "/etc/localtime",
-        "target": "../usr/share/zoneinfo/America/Phoenix"
+        "target": "../usr/share/zoneinfo/Etc/UTC"
       },
       {
         "path": "/etc/systemd/system/multi-user.target.wants/unbound.service",
