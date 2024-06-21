@@ -30,26 +30,10 @@
                 "--network=host",
                 "--host-uds=open"
             ]
-        },
-        "runsc-kvm-debug": {
-            "path": "/usr/local/bin/runsc",
-            "runtimeArgs": [
-                "--platform=kvm",
-                "--network=host",
-                "--debug-log=/tmp/runsc-kvm/",
-                "--debug",
-                "--strace"
-            ]
-        },
-        "runsc-systrap-debug": {
-            "path": "/usr/local/bin/runsc",
-            "runtimeArgs": [
-                "--platform=systrap",
-                "--network=host",
-                "--debug-log=/tmp/runsc-systrap/",
-                "--debug",
-                "--strace"
-            ]
         }
-    }
+    },
+    "default-address-pools": [
+        { "base": "242.242.0.0/16", "size": 24 }
+    ],
+    "dns" : [ "242.242.0.1" ]
 }
