@@ -183,7 +183,7 @@
       {
         "path": "/etc/systemd/system/unbound.service.d/override.conf",
         "contents": {
-          "source": "https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/systemd/system/unbound.service.d/override.conf"
+          "source": "https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/system/unbound.service.d/override.conf"
         }
       },
       {
