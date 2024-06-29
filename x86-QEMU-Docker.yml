@@ -81,42 +81,56 @@ systemd:
 
         [Install]
         WantedBy=multi-user.target
-    - name: gvisor-downloader.service
+    - name: gvisor-updater.service
       enabled: true
       contents: |
         [Unit]
-        Description=Download gVisor
+        Description=Update gVisor
         After=network-online.target
         Before=docker.service
 
         [Service]
-        User=unpriv
-        WorkingDirectory=/var/home/unpriv
         Type=oneshot
+        RuntimeDirectory=gvisor-updater
+        WorkingDirectory=/run/gvisor-updater
         ExecStart=/usr/bin/sleep 5
         ExecStart=/usr/bin/curl -sS -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc
         ExecStart=/usr/bin/curl -sS -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512
         ExecStart=/usr/bin/curl -sS -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1
         ExecStart=/usr/bin/curl -sS -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512
-
-        [Install]
-        WantedBy=multi-user.target
-    - name: gvisor-updater.service
-      enabled: true
-      contents: |
-        [Unit]
-        Description=Copy gVisor to the correct location
-        After=gvisor-downloader.service
-
-        [Service]
-        WorkingDirectory=/var/home/unpriv
-        Type=oneshot
         ExecStart=/usr/bin/sha512sum -c runsc.sha512 -c containerd-shim-runsc-v1.sha512
         ExecStart=/usr/bin/rm -f runsc.sha512 containerd-shim-runsc-v1.sha512
-        ExecStart=/usr/bin/chown root:root runsc containerd-shim-runsc-v1
-        ExecStart=/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1
-        ExecStart=/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin
-        ExecStart=/usr/bin/chcon system_u:object_r:container_runtime_exec_t:s0 /var/usrlocal/bin/runsc
+        ExecStart=+/usr/bin/chown root:root runsc containerd-shim-runsc-v1
+        ExecStart=+/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1
+        ExecStart=+/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin
+        ExecStart=+/usr/bin/chcon system_u:object_r:container_runtime_exec_t:s0 /var/usrlocal/bin/runsc
+
+        DynamicUser=true
+        CapabilityBoundingSet=
+        LockPersonality=true
+        MemoryDenyWriteExecute=true
+        NoNewPrivileges=true
+        PrivateDevices=true
+        PrivateIPC=true
+        PrivateTmp=true
+        ProcSubset=pid
+        ProtectClock=true
+        ProtectControlGroups=true
+        ProtectHome=true
+        ProtectHostname=true
+        ProtectKernelLogs=true
+        ProtectKernelModules=true
+        ProtectKernelTunables=true
+        ProtectProc=invisible
+        ProtectSystem=strict
+        RestrictAddressFamilies=
+        RestrictNamespaces=true
+        RestrictRealtime=true
+        RestrictSUIDSGID=true
+        RuntimeDirectoryMode=700
+        SystemCallArchitectures=native
+        SystemCallFilter=@system-service
+        SystemCallFilter=~@obsolete
 
         [Install]
         WantedBy=multi-user.target
