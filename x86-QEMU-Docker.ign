@@ -239,7 +239,7 @@
         "name": "docker-compose-updater@.service"
       },
       {
-        "contents": "[Unit]\nDescription=Run docker-compose-updater for /srv/%I once a week, 15 mintues after OS updates\n\n[Timer]\nOnCalendar=Fri 0:15\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n",
+        "contents": "[Unit]\nDescription=Run docker-compose-updater for /srv/%I once a week, 15 mintues after OS updates\n\n[Timer]\nOnCalendar=Fri 2:15\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n",
         "enabled": false,
         "name": "docker-compose-updater@.timer"
       },

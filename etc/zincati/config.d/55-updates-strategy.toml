@@ -6,5 +6,5 @@ time_zone = "localtime"
 
 [[updates.periodic.window]]
 days = [ "Tue", "Fri" ]
-start_time = "0:00"
+start_time = "2:00"
 length_minutes = 60
