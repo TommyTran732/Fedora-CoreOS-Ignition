@@ -118,7 +118,7 @@ storage:
       overwrite: true
     - path: /etc/modprobe.d/vps-blacklist.conf
       contents:
-        source: https://raw.githubusercontent.com/secureblue/secureblue/live/config/files/usr/etc/modprobe.d/blacklist.conf
+        source: https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/etc/modprobe.d/blacklist.conf
     - path: /etc/sysctl.d/99-server.conf
       contents:
         source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-server.conf

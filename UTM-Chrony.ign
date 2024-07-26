@@ -82,7 +82,7 @@
       {
         "path": "/etc/modprobe.d/vps-blacklist.conf",
         "contents": {
-          "source": "https://raw.githubusercontent.com/secureblue/secureblue/live/config/files/usr/etc/modprobe.d/blacklist.conf"
+          "source": "https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/etc/modprobe.d/blacklist.conf"
         }
       },
       {
