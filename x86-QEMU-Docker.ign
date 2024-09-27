@@ -234,7 +234,7 @@
         "name": "gvisor-updater.service"
       },
       {
-        "contents": "[Unit]\nDescription=Docker Compose Updater for /srv/%I\nAfter=network-online.target\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nType=oneshot\nUser=root\nGroup=root\nWorkingDirectory=/srv/%i\nExecStart=/usr/bin/docker image prune -f -a --filter 'until=240h'\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n",
+        "contents": "[Unit]\nDescription=Docker Compose Updater for /srv/%I\nRequires=network-online.target\nRequisite=docker.service\nAfter=network-online.target\nAfter=docker.service\n\n[Service]\nType=oneshot\nUser=root\nGroup=root\nWorkingDirectory=/srv/%i\nExecStart=/usr/bin/docker image prune -f -a --filter 'until=240h'\n#ExecStart=/usr/bin/git pull\nExecStart=/usr/bin/docker compose pull\nExecStart=/usr/bin/docker compose up -d\n",
         "enabled": false,
         "name": "docker-compose-updater@.service"
       },
