@@ -140,9 +140,10 @@ systemd:
       contents: |
         [Unit]
         Description=Docker Compose Updater for /srv/%I
+        Requires=network-online.target
+        Requires=gvisor-updater.service
         After=network-online.target
-        After=docker.service
-        Requires=docker.service
+        After=gvisor-updater.service
 
         [Service]
         Type=oneshot
