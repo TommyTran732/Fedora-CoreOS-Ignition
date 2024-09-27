@@ -86,6 +86,7 @@ systemd:
       contents: |
         [Unit]
         Description=Update gVisor
+        Requires=network-online.target
         After=network-online.target
         Before=docker.service
 
