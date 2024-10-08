@@ -94,17 +94,13 @@ systemd:
         Type=oneshot
         RuntimeDirectory=gvisor-updater
         WorkingDirectory=/run/gvisor-updater
+        
         ExecStart=/usr/bin/sleep 5
-        ExecStart=/usr/bin/curl -sS -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc
-        ExecStart=/usr/bin/curl -sS -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512
-        ExecStart=/usr/bin/curl -sS -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1
-        ExecStart=/usr/bin/curl -sS -O https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512
-        ExecStart=/usr/bin/sha512sum -c runsc.sha512 -c containerd-shim-runsc-v1.sha512
-        ExecStart=/usr/bin/rm -f runsc.sha512 containerd-shim-runsc-v1.sha512
-        ExecStart=+/usr/bin/chown root:root runsc containerd-shim-runsc-v1
-        ExecStart=+/usr/bin/chmod a+rx runsc containerd-shim-runsc-v1
-        ExecStart=+/usr/bin/mv runsc containerd-shim-runsc-v1 /var/usrlocal/bin
-        ExecStart=+/usr/bin/chcon system_u:object_r:container_runtime_exec_t:s0 /var/usrlocal/bin/runsc
+        ExecStart=curl -sS --remote-name-all 'https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc' 'https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/runsc.sha512' 'https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1' 'https://storage.googleapis.com/gvisor/releases/release/latest/x86_64/containerd-shim-runsc-v1.sha512'
+        ExecStart=sha512sum -c runsc.sha512 -c containerd-shim-runsc-v1.sha512
+        ExecStart=+chown root:root runsc containerd-shim-runsc-v1
+        ExecStart=+chmod a+rx runsc containerd-shim-runsc-v1
+        ExecStart=+mv -Z runsc containerd-shim-runsc-v1 /usr/local/bin/
 
         DynamicUser=true
         CapabilityBoundingSet=
