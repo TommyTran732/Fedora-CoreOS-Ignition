@@ -116,7 +116,7 @@
         }
       },
       {
-        "path": "/etc/systemd/system/sshd.service.d/local.conf",
+        "path": "/etc/systemd/system/sshd.service.d/override.conf",
         "contents": {
           "source": "https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf"
         }
