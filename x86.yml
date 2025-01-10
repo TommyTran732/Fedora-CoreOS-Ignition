@@ -205,7 +205,7 @@ storage:
       contents:
         source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf
       overwrite: true
-    - path: /etc/modprobe.d/vps-blacklist.conf
+    - path: /etc/modprobe.d/server-blacklist.conf
       contents:
         source: https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/usr/etc/modprobe.d/blacklist.conf
     - path: /etc/sysctl.d/99-server.conf
