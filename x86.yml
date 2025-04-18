@@ -203,7 +203,7 @@ storage:
         source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/docker/daemon.json
     - path: /etc/chrony.conf
       contents:
-        source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf
+        source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/refs/heads/main/etc/chrony.conf
       overwrite: true
     - path: /etc/modprobe.d/server-blacklist.conf
       contents:
