@@ -276,6 +276,8 @@ kernel_arguments:
     - kvm.nx_huge_pages=force
     - nosmt=force
     - l1d_flush=on
+    - l1tf=full,force 
+    - kvm-intel.vmentry_l1d_flush=always
     - spec_rstack_overflow=safe-ret
     - gather_data_sampling=force 
     - reg_file_data_sampling=on
@@ -298,6 +300,5 @@ kernel_arguments:
     - debugfs=off
     - lockdown=confidentiality
     - module.sig_enforce=1
-    - oops=panic
     - console=tty0
     - console=ttyS0,115200
