@@ -47,30 +47,9 @@ systemd:
         ExecStart=/usr/sbin/setsebool -P virt_use_nfs off
         ExecStart=/usr/sbin/setsebool -P virt_use_samba off
         ExecStart=/usr/bin/rpm-ostree override remove containerd docker-cli dnsmasq google-compute-engine-guest-configs-udev iptables-legacy iptables-legacy-libs moby-engine runc
-        ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld hardened_malloc qemu-guest-agent tuned
+        ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin hardened_malloc qemu-guest-agent tuned
         ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
-        ExecStart=/usr/bin/touch /var/lib/%N.stamp
-        ExecStart=/usr/bin/systemctl --no-block reboot
-
-        [Install]
-        WantedBy=multi-user.target
-    - name: postinst2.service
-      enabled: true
-      contents: |
-        [Unit]
-        Description=Initial System Setup Part 2
-        # We run this after the packages have been overlayed
-        After=network-online.target
-        ConditionPathExists=!/var/lib/%N.stamp
-        ConditionPathExists=/var/lib/postinst.stamp
-
-        [Service]
-        Type=oneshot
-        RemainAfterExit=yes
         ExecStart=/usr/bin/echo 'libhardened_malloc.so' > /etc/ld.so.preload
-        ExecStart=/usr/bin/systemctl enable --now firewalld
-        ExecStart=/usr/bin/firewall-cmd --lockdown-on
-        ExecStart=/usr/bin/firewall-cmd --permanent --remove-service=mds
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
 
@@ -149,10 +128,10 @@ systemd:
       enabled: false
       contents: |
         [Unit]
-        Description=Run docker-compose-updater for /srv/%I once a week, 15 mintues after OS updates
+        Description=Run docker-compose-updater for /srv/%I daily, 15 mintues after OS updates
 
         [Timer]
-        OnCalendar=Fri 2:15
+        OnCalendar=daily 3:15
         Persistent=true
 
         [Install]

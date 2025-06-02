@@ -151,10 +151,10 @@ systemd:
       enabled: false
       contents: |
         [Unit]
-        Description=Run docker-compose-updater for /srv/%I once a week, 15 mintues after OS updates
+        Description=Run docker-compose-updater for /srv/%I daily, 15 mintues after OS updates
 
         [Timer]
-        OnCalendar=Fri 2:15
+        OnCalendar=daily 3:15
         Persistent=true
 
         [Install]
