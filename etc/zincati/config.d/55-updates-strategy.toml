@@ -5,6 +5,6 @@ strategy = "periodic"
 time_zone = "localtime"
 
 [[updates.periodic.window]]
-days = [ "Tue", "Fri" ]
-start_time = "2:00"
+days = [ "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" ]
+start_time = "3:00"
 length_minutes = 60
