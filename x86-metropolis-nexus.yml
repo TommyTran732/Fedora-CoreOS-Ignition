@@ -49,8 +49,8 @@ systemd:
         ExecStart=/usr/bin/rpm-ostree override remove containerd docker-cli dnsmasq google-compute-engine-guest-configs-udev iptables-legacy iptables-legacy-libs moby-engine runc
         ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin hardened_malloc qemu-guest-agent tuned
         ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
-        ExecStart=/usr/bin/echo 'libhardened_malloc.so' > /etc/ld.so.preload
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
+        ExecStart=/usr/bin/echo 'libhardened_malloc.so' > /etc/ld.so.preload
         ExecStart=/usr/bin/systemctl --no-block reboot
 
         [Install]
