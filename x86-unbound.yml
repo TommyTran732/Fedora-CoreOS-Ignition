@@ -46,7 +46,7 @@ systemd:
         ExecStart=/usr/sbin/setsebool -P container_use_cephfs off
         ExecStart=/usr/sbin/setsebool -P virt_use_nfs off
         ExecStart=/usr/sbin/setsebool -P virt_use_samba off
-        ExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd docker-cli dnsmasq google-compute-engine-guest-configs-udev iptables-legacy iptables-legacy-libs moby-engine runc samba-client-libs samba-common libwbclient libsmbclient samba-common-libs sssd-client sssd-ldap sssd-common sssd-krb5-common sssd-nfs-idmap sssd-ad sssd-krb5 sssd-ipa sssd-common-pac systemd-resolved
+        ExecStart=/usr/bin/rpm-ostree override remove containerd docker-cli dnsmasq google-compute-engine-guest-configs-udev iptables-legacy iptables-legacy-libs moby-engine runc systemd-resolved
         ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld hardened_malloc qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/systemctl disable systemd-resolved
