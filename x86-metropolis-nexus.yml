@@ -131,7 +131,7 @@ systemd:
         Description=Run docker-compose-updater for /srv/%I daily, 15 mintues after OS updates
 
         [Timer]
-        OnCalendar=daily 3:15
+        OnCalendar=*-*-* 03:15
         Persistent=true
 
         [Install]
