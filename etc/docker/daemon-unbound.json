@@ -16,5 +16,9 @@
                 "--host-uds=open"
             ]
         }
-    }
+    },
+    "default-address-pools": [
+        { "base": "242.242.0.0/16", "size": 24 }
+    ],
+    "dns" : [ "242.242.0.1" ]
 }

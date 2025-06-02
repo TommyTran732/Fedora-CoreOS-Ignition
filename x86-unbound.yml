@@ -46,9 +46,10 @@ systemd:
         ExecStart=/usr/sbin/setsebool -P container_use_cephfs off
         ExecStart=/usr/sbin/setsebool -P virt_use_nfs off
         ExecStart=/usr/sbin/setsebool -P virt_use_samba off
-        ExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd docker-cli dnsmasq google-compute-engine-guest-configs-udev iptables-legacy iptables-legacy-libs moby-engine runc samba-client-libs samba-common libwbclient libsmbclient samba-common-libs sssd-client sssd-ldap sssd-common sssd-krb5-common sssd-nfs-idmap sssd-ad sssd-krb5 sssd-ipa sssd-common-pac
-        ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld hardened_malloc qemu-guest-agent tuned
+        ExecStart=/usr/bin/rpm-ostree override remove cifs-utils containerd docker-cli dnsmasq google-compute-engine-guest-configs-udev iptables-legacy iptables-legacy-libs moby-engine runc samba-client-libs samba-common libwbclient libsmbclient samba-common-libs sssd-client sssd-ldap sssd-common sssd-krb5-common sssd-nfs-idmap sssd-ad sssd-krb5 sssd-ipa sssd-common-pac systemd-resolved
+        ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld hardened_malloc qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
+        ExecStart=/usr/bin/systemctl disable systemd-resolved
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
 
@@ -71,6 +72,7 @@ systemd:
         ExecStart=/usr/bin/systemctl enable --now firewalld
         ExecStart=/usr/bin/firewall-cmd --lockdown-on
         ExecStart=/usr/bin/firewall-cmd --permanent --remove-service=mds
+        ExecStart=/usr/bin/rm /etc/unbound/unbound_control.key
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
 
@@ -192,7 +194,7 @@ storage:
         source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/yum.repos.d/docker-ce.repo
     - path: /etc/docker/daemon.json
       contents:
-        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/docker/daemon.json
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/docker/daemon-unbound.json
     - path: /etc/chrony.conf
       contents:
         source: https://raw.githubusercontent.com/GrapheneOS/infrastructure/refs/heads/main/etc/chrony.conf
@@ -237,6 +239,12 @@ storage:
       overwrite: true
       contents:
         source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd
+    - path: /etc/unbound/unbound.conf
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Fedora-CoreOS-Ignition/main/etc/unbound/unbound.conf
+    - path: /etc/systemd/system/unbound.service.d/override.conf
+      contents:
+        source: https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/system/unbound.service.d/override.conf
     - path: /etc/issue
       overwrite: true
       contents:
@@ -248,6 +256,8 @@ storage:
   links:
     - path: /etc/localtime
       target: ../usr/share/zoneinfo/Etc/UTC
+    - path: /etc/systemd/system/multi-user.target.wants/unbound.service
+      target: /usr/lib/systemd/system/unbound.service
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service
       target: /usr/lib/systemd/system/tuned.service
 kernel_arguments:
