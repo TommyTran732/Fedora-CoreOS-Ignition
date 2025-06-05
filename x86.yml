@@ -77,7 +77,7 @@ storage:
   files:
     - path: /etc/chrony.conf
       contents:
-        source: https://raw.githubusercontent.com/Metropolis-nexus/main/etc/chrony.conf
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/chrony.conf
       overwrite: true
     - path: /etc/sysconfig/chronyd
       overwrite: true
