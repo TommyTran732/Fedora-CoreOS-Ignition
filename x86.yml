@@ -1,0 +1,214 @@
+# Copyright (C) 2021-2025 Thien Tran
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
+
+variant: fcos
+version: 1.6.0
+
+passwd:
+  users:
+    - name: tomster
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkTKkJS7Id1WCyA5Klu/moLG9mP5hTC+v2qYqypMF1u contact@tommytran.io
+      groups:
+        - wheel
+        - sudo
+
+systemd:
+  units:
+    - name: postinst.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Initial System Setup
+        # We run after `systemd-machine-id-commit.service` to ensure that
+        # `ConditionFirstBoot=true` services won't rerun on the next boot.
+        After=systemd-machine-id-commit.service
+        After=network-online.target
+        # We run before `zincati.service` to avoid conflicting rpm-ostree
+        # transactions.
+        Before=zincati.service
+        ConditionPathExists=!/var/lib/%N.stamp
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/sbin/restorecon -R /var
+        ExecStart=/usr/sbin/setsebool -P container_use_cephfs off
+        ExecStart=/usr/sbin/setsebool -P virt_use_nfs off
+        ExecStart=/usr/sbin/setsebool -P virt_use_samba off
+        ExecStart=/usr/bin/rpm-ostree install hardened_malloc qemu-guest-agent tuned
+        ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
+        ExecStart=/usr/bin/systemctl disable systemd-resolved
+        ExecStart=/usr/bin/rm /etc/resolv.conf
+        ExecStart=/usr/bin/touch /var/lib/%N.stamp
+        ExecStart=/usr/bin/echo 'libhardened_malloc.so' > /etc/ld.so.preload
+        ExecStart=/usr/bin/systemctl --no-block reboot
+
+        [Install]
+        WantedBy=multi-user.target
+
+    - name: debug-shell.service
+      enabled: false
+      mask: true 
+    - name: docker.service
+      enabled: false
+    - name: rpm-ostree-countme.timer
+      enabled: false
+      mask: true
+    - name: irqbalance.service
+      enabled: false
+      mask: true
+    - name: kdump.service
+      enabled: false
+      mask: true
+    - name: systemd-resolved.service
+      enabled: false
+      mask: true
+
+storage:
+  files:
+    - path: /etc/chrony.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/main/etc/chrony.conf
+      overwrite: true
+    - path: /etc/sysconfig/chronyd
+      overwrite: true
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysconfig/chronyd
+
+    - path: /etc/docker/daemon.json
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/docker/daemon.json
+
+    - path: /etc/issue
+      overwrite: true
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/issue
+    - path: /etc/issue.net
+      overwrite: true
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/issue
+
+    - path: /etc/modprobe.d/server-blacklist.conf
+      contents:
+        source: https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf
+
+    - path: /etc/security/limits.d/30-disable-coredump.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/security/limits.d/30-disable-coredump.conf
+
+    - path: /etc/ssh/sshd_config.d/10-custom.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/sshd_config.d/10-custom.conf
+    - path: /etc/ssh/ssh_config.d/10-custom.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/ssh/ssh_config.d/10-custom.conf
+    - path: /etc/systemd/system/sshd.service.d/override.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/sshd.service.d/override.conf
+
+    - path: /etc/sysctl.d/99-server.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysctl.d/99-server.conf
+
+    - path: /etc/systemd/coredump.conf.d
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/coredump.conf.d/disable.conf
+
+    - path: /etc/systemd/system/gvisor-updater.service
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/gvisor-updater.service
+
+    # Annoying AGPL3 license
+    - path: /etc/systemd/system/NetworkManager.service.d/99-brace.conf
+      contents:
+        source: https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf
+
+    - path: /etc/systemd/zram-generator.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/zram-generator.conf
+
+    - path: /etc/tuned/active_profile
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/tuned/active_profile
+    - path: /etc/tuned/profile_mode
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/tuned/profile_mode
+
+    - path: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:hardened_malloc.repo
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:secureblue:hardened_malloc.repo
+      overwrite: true
+
+    - path: /etc/zincati/config.d/51-rollout-wariness.toml
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/zincati/config.d/51-rollout-wariness.toml
+    - path: /etc/zincati/config.d/55-updates-strategy.toml
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/zincati/config.d/55-updates-strategy.toml
+
+  links:
+    - path: /etc/systemd/system/multi-user.target.wants/gvisor-updater.service
+      target: /etc/systemd/system/gvisor-updater.service
+    - path: /etc/systemd/system/multi-user.target.wants/tuned.service
+      target: /usr/lib/systemd/system/tuned.service
+
+kernel_arguments:
+  should_exist:
+  # CPU vulnerabilities
+    - mitigations=auto,nosmt
+    - nosmt=force
+    - spectre_v2=on
+    - spectre_bhi=on
+    - spec_store_bypass_disable=on
+    - tsx=off
+    - l1d_flush=on
+    - l1tf=full,force 
+    - kvm-intel.vmentry_l1d_flush=always
+    - spec_rstack_overflow=safe-ret
+    - gather_data_sampling=force 
+    - reg_file_data_sampling=on
+    - kvm.nx_huge_pages=force
+
+  # DMA protection
+    - amd_iommu=force_isolation
+    - intel_iommu=on
+    - iommu=force
+    - iommu.strict=1
+    - iommu.passthrough=0
+    - efi=disable_early_pci_dma
+
+  # Memory protection
+    - slab_nomerge
+    - init_on_alloc=1
+    - init_on_free=1
+    - page_alloc.shuffle=1
+    - pti=on
+    - randomize_kstack_offset=on
+
+  # ASR
+    - lockdown=confidentiality
+    - module.sig_enforce=1
+    - oops=panic
+    - vsyscall=none
+    - ia32_emulation=0
+    - debugfs=off
+
+  # Entropy
+    - random.trust_bootloader=off
+    - random.trust_cpu=off
+
+  # Serial support for Proxmox
+    - console=tty0
+    - console=ttyS0,115200
