@@ -72,9 +72,6 @@ systemd:
     - name: kdump.service
       enabled: false
       mask: true
-    - name: systemd-resolved.service
-      enabled: false
-      mask: true
 
 storage:
   files:
@@ -87,6 +84,9 @@ storage:
       contents:
         source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/sysconfig/chronyd
 
+    - path: /etc/containers/containers.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/containers/containers.conf
     - path: /etc/docker/daemon.json
       contents:
         source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/docker/daemon.json
