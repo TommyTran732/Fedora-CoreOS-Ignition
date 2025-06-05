@@ -50,6 +50,7 @@ systemd:
         ExecStart=/usr/bin/rpm-ostree install docker-ce docker-compose-plugin firewalld hardened_malloc qemu-guest-agent tuned unbound
         ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
         ExecStart=/usr/bin/systemctl disable systemd-resolved
+        ExecStart=/usr/bin/rm /etc/resolv.conf
         ExecStart=/usr/bin/touch /var/lib/%N.stamp
         ExecStart=/usr/bin/systemctl --no-block reboot
 
