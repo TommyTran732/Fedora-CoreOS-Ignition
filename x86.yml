@@ -35,10 +35,7 @@ systemd:
         # `ConditionFirstBoot=true` services won't rerun on the next boot.
         After=systemd-machine-id-commit.service
         After=network-online.target
-        # We run before `zincati.service` to avoid conflicting rpm-ostree
-        # transactions.
         Before=zincati.service
-        ConditionPathExists=!/var/lib/%N.stamp
 
         [Service]
         Type=oneshot
@@ -49,9 +46,8 @@ systemd:
         ExecStart=/usr/sbin/setsebool -P virt_use_samba off
         ExecStart=/usr/bin/rpm-ostree install hardened_malloc qemu-guest-agent tuned
         ExecStart=/usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
-        ExecStart=/usr/bin/systemctl disable systemd-resolved
-        ExecStart=/usr/bin/rm /etc/resolv.conf
-        ExecStart=/usr/bin/touch /var/lib/%N.stamp
+        ExecStart=/usr/bin/systemctl disable postinst
+        ExecStart=/usr/bin/rm /etc/systemd/system/postinst.service
         ExecStart=/usr/bin/echo 'libhardened_malloc.so' > /etc/ld.so.preload
         ExecStart=/usr/bin/systemctl --no-block reboot
 
@@ -63,6 +59,8 @@ systemd:
       mask: true 
     - name: docker.service
       enabled: false
+    - name: podman-auto-update.timer
+      enabled: true
     - name: rpm-ostree-countme.timer
       enabled: false
       mask: true
