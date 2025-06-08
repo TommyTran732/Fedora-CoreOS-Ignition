@@ -124,14 +124,21 @@ storage:
       contents:
         source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/coredump.conf.d/disable.conf
 
-    - path: /etc/systemd/system/gvisor-updater.service
+    - path: /etc/systemd/system/gvisor-auto-update.service
       contents:
-        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/gvisor-updater.service
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/gvisor-auto-update.service
+    - path: /etc/systemd/system/gvisor-auto-update.timer
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/gvisor-auto-update.timer
 
     # Annoying AGPL3 license
     - path: /etc/systemd/system/NetworkManager.service.d/99-brace.conf
       contents:
         source: https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/systemd/system/NetworkManager.service.d/99-brace.conf
+
+    - path: /etc/systemd/system/podman-auto-update.timer.d/override.conf
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/podman-auto-update.timer.d/override.conf
 
     - path: /etc/systemd/zram-generator.conf
       contents:
@@ -157,10 +164,10 @@ storage:
         source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/zincati/config.d/55-updates-strategy.toml
 
   links:
-    - path: /etc/systemd/system/multi-user.target.wants/gvisor-updater.service
-      target: /etc/systemd/system/gvisor-updater.service
     - path: /etc/systemd/system/multi-user.target.wants/tuned.service
       target: /usr/lib/systemd/system/tuned.service
+    - path: /etc/systemd/system/timers.target.wants/gvisor-auto-update.timer
+      target: /etc/systemd/system/gvisor-auto-update.timer
 
 kernel_arguments:
   should_exist:
