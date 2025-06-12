@@ -80,8 +80,6 @@ systemd:
     - name: debug-shell.service
       enabled: false
       mask: true 
-    - name: docker.service
-      enabled: false
     - name: podman-auto-update.timer
       enabled: true
     - name: rpm-ostree-countme.timer
