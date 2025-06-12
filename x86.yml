@@ -147,6 +147,13 @@ storage:
       contents:
         source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/coredump.conf.d/disable.conf
 
+    - path: /etc/systemd/system/docker-auto-update@.service
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/systemd/system/docker-auto-update%40.service
+    - path: /etc/systemd/system/docker-auto-update@.timer
+      contents:
+        source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/refs/heads/main/etc/systemd/system/docker-auto-update%40.timer
+
     - path: /etc/systemd/system/gvisor-auto-update.service
       contents:
         source: https://raw.githubusercontent.com/Metropolis-nexus/Common-Files/main/etc/systemd/system/gvisor-auto-update.service
